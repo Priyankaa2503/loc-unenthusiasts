@@ -44,9 +44,9 @@ function Navbar({newid,setnewid}) {
               EXPLORE
             </div>
           </Link>
-          <Link to="/gallery">
-            <div className=" hover:scale-110 transition duration-300 ease-in-out  text-white  text-xl font-medium font-jost ">
-              GALLERY
+          <Link to="/profile">
+            <div className=" hover:scale-110 transition duration-300 ease-in-out  text-white  text-xl font-medium font-jost " onClick={handlecuruserprofile}>
+              PROFILE
             </div>
           </Link>
           <Link to="/events">

@@ -6,7 +6,9 @@ import Login from "./Login/signup/Login";
 import Signup from "./Login/signup/Signup";
 import Home from "./pages/Home";
 import Chats from './components/Chats';
+import Events from "./pages/Events";
 function App() {
+
   return (
     <div>
       <Router>
@@ -17,6 +19,7 @@ function App() {
           <Route path="/explore" element={<Landing />}></Route>
           <Route path="/footer" element={<Footer />}></Route>
           <Route path="/chats" element={<Chats />}></Route>
+          <Route path="/events" element={<Events />}></Route>
         </Routes>
       </Router>
     </div>

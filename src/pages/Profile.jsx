@@ -12,7 +12,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 
-export const Profile = ({newid}) => {
+export const Profile = () => {
     const [data, setdata] = useState({});
     const auth = getAuth();
     const user = auth.currentUser;
@@ -25,7 +25,7 @@ export const Profile = ({newid}) => {
 
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
-        const nameQuery=query(collectionRef,where("createdby","==",newid))
+        const nameQuery=query(collectionRef,where("createdby","==",user.uid))
         var arr=[];
           await getDocs(nameQuery)
               .then((res) => {
@@ -44,7 +44,7 @@ export const Profile = ({newid}) => {
       }
 
     const getfireuser = async () => {
-        const docRef = doc(database, "users", newid);
+        const docRef = doc(database, "users", user.uid);
         const docSnap = await getDoc(docRef);
         setfireuser(docSnap.data())
     }
@@ -56,7 +56,7 @@ export const Profile = ({newid}) => {
     }
 
     const handleUpdate = () => {
-        const doctoupdate = doc(database, 'users', newid)
+        const doctoupdate = doc(database, 'users', user.uid)
         updateDoc(doctoupdate, {
             bio: data.bio,
             type: data.type
@@ -64,7 +64,7 @@ export const Profile = ({newid}) => {
     }
 
     const handleUpdateImage = () => {
-        const storageRef = ref(storage, newid);
+        const storageRef = ref(storage, user.uid);
 
         const uploadTask = uploadBytesResumable(storageRef, data.image)
         uploadTask.on('state_changed',
@@ -75,7 +75,7 @@ export const Profile = ({newid}) => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               console.log('File available at', downloadURL);
-              await updateDoc(doc(database, "users", newid), {
+              await updateDoc(doc(database, "users", user.uid), {
                 imageURL: downloadURL
               })
             });
@@ -114,11 +114,11 @@ export const Profile = ({newid}) => {
                 <div className="flex flex-col h-[100%] bg-[#00000050] w-[60%] p-8">
                     <div className='flex flex-row h-[20px] w-100%'>
                         <div className='mr-16 text-2xl font-bold text-white'>Name</div>
-                        <div className='text-2xl font-bold text-white'>{fireuser.name}</div>
+                        <div className='text-2xl font-bold text-white'>{user.displayName}</div>
                     </div>
                     <div className='flex flex-row h-[20px] w-100% mt-12'>
                         <div className='mr-16 text-2xl font-bold text-white'>E-mail</div>
-                        <div className='text-2xl font-bold text-white'>{fireuser.email}</div>
+                        <div className='text-2xl font-bold text-white'>{user.email}</div>
                     </div>
                     <div className='flex flex-row h-[20px] w-100% mt-12'>
                         <div className='mr-16 text-2xl font-bold text-white'>Bio</div>
@@ -139,6 +139,40 @@ export const Profile = ({newid}) => {
                     </Button>
                 </div>
             </div>
+            {/* <div class="">
+  <form class="bg-white p-6 rounded-lg shadow-md">
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="caption">
+        Caption
+      </label>
+      <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="image">
+        Image
+      </label>
+      <input class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image" id="image"></input>
+      </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="tags">
+        Tags
+      </label>
+    
+    
+      <select class="form-multiselect block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple id="tags" name="tags[]">
+        <option value="tag1">Tag 1</option>
+        <option value="tag2">Tag 2</option>
+        <option value="tag3">Tag 3</option>
+      </select>
+    </div>
+    <div class="flex justify-end">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Add Post
+      </button>
+    </div>
+  </form>
+</div> */}
+
             <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">
                 <p className="font-jost text-black font-bold text-[100px] mt-10 p-10">My Gallery</p>
                 <div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
@@ -155,6 +189,7 @@ export const Profile = ({newid}) => {
            } 
         </div>
             </div>
+         
         </div>
 
     )

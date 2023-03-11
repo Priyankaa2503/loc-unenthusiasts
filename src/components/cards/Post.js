@@ -146,22 +146,22 @@ else{
 
     return(
       
-        <div className='mt-10 ml-10 bg-white rounded-xl p-6 w-[640px]'>
-            <div className="flex flex-row gap-2" onClick={handleGotoProfile}><AccountCircleIcon/><span>{data.name}</span></div>          
-            <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-3'></img>
+        <div className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
+            <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{data.name}</span></div>          
+            <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-2 rounded-md'></img>
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
-                    <div onClick={handleLike} className='text-[#2f2e2e] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
-                    <div className='text-[#2f2e2e] font-grotesk' onClick={handleClick} style={{cursor:"pointer"}}>View More<ArrowDropDownIcon/></div>
+                    <div onClick={handleLike} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
+                    <div className='text-[#A7727D] font-grotesk' onClick={handleClick} style={{cursor:"pointer"}}>View More<ArrowDropDownIcon/></div>
                 </div>
                 {isShown &&(
                 <div className='flex flex-col'>
-                    <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>{data.caption}</div>
-                    <div className='text-[#2f2e2e] mt-2 text-xl font-playfair justify-between flex flex-row'>
-                        <p className='text-m text-[#2f2e2e] font-grotesk mt-2 flex gap-2  '>{data.tags.map((item)=>{return<p class="bg-transparent  text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded">
- # {item}
-</p> })}</p>
-                        <  ShoppingCartIcon onClick={()=>{handlePayment("rzp_test_Pw7oOZCGeCRVYw",data.name)}} />
+                    <div className='text-[#A7727D] mt-2 text-xl font-playfair'>{data.caption}</div>
+                    <div className='text-[#A7727D] mt-2 text-xl font-playfair justify-between flex flex-row'>
+                        <p className='text-md text-[#A7727D] font-grotesk flex gap-2  '>{data.tags.map((item)=>{return<p class="bg-transparent text-[#A7727D] font-semibold mt-2 ">
+                            #{item}
+                            </p> })}</p>
+                        <  ShoppingCartIcon onClick={()=>{handlePayment("rzp_test_Pw7oOZCGeCRVYw",data.name)}}  style={{ width: "40px", height: "40px" }} />
                     </div>
                 </div>
                 )}

@@ -49,22 +49,22 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
   //     // console.log(arr[Math.floor(Math.random()*arr.length)]);
         for(var i=0;i<10;){
           
-            var val=Math.floor(Math.random()*arr.length);
+          //   var val=Math.floor(Math.random()*arr.length);
 
-          var id=arr[val].uid;
-          var postarr=arr[val].posts;
-          const lorem = new LoremIpsum({
-            sentencesPerParagraph: {
-              max: 8,
-              min: 4
-            },
-            wordsPerSentence: {
-              max: 10,
-              min: 4
-            }
-          });
-          var para=lorem.generateParagraphs(1);
-          console.log(para);
+          // var id=arr[val].uid;
+          // var postarr=arr[val].posts;
+          // const lorem = new LoremIpsum({
+          //   sentencesPerParagraph: {
+          //     max: 8,
+          //     min: 4
+          //   },
+          //   wordsPerSentence: {
+          //     max: 10,
+          //     min: 4
+          //   }
+          // });
+          // var para=lorem.generateParagraphs(1);
+          // console.log(para);
 
           const options2 = {
             method: 'POST',
@@ -74,10 +74,10 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
               'X-RapidAPI-Key': 'fc9ac53e3amsh7f0c55372e6f0bep1224a8jsn1e1b9847a5de',
               'X-RapidAPI-Host': 'hydra-ai.p.rapidapi.com'
             },
-            data: '{"image":"https://picsum.photos/id/${i+10}/652/360"}'
+            data: `{"image":"https://picsum.photos/id/${i+10}/652/360"}`
           };
 
-          axios.request(options2).then(async function (response) {
+          await axios.request(options2).then(async function (response) {
             console.log(response.data)
             i++;
             // const docq=await addDoc(collectionRef, {
@@ -189,9 +189,9 @@ export default function Home() {
        
         <span className="text-white text-5xl font-jost">PHOTOGRAPHY</span>
         {/* <Wallet></Wallet> */}
-        {/* <button onClick={handlePayment} >
+        <button onClick={adddata} >
 asfcsdzgvwesdfwESDFwef
-        </button> */}
+        </button>
         <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="/signup">GET STARTED</Link></button>
       </div>
     </div>

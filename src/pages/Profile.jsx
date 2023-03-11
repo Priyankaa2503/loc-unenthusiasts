@@ -12,13 +12,21 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 
-
-export const Profile = () => {
+export const Profile = ({newid,setnewid}) => {
     const [data, setdata] = useState({});
     const auth = getAuth();
     const user = auth.currentUser;
+    if(newid===''){
+        console.log(user.uid);
+        setnewid(user.uid);
+    }
     const [fireuser, setfireuser] = useState({})
     const [cardarr,setcardarr]=useState([]);
+    console.log(newid);
+    useEffect(() => {
+        getfireuser();
+        getImages();
+    }, [newid])
     useEffect(() => {
         getfireuser();
         getImages();
@@ -85,8 +93,8 @@ export const Profile = () => {
 
     return (
         <div>
-            <Navbar />
-            <div className="flex flex-row bg-profileBg p-48 h-screen bg-cover bg-no-repeat">
+            <Navbar newid={newid} setnewid={setnewid} />
+            <div className="flex flex-row bg-profileBg p-48 h-screen w-screen bg-cover bg-no-repeat">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
                     <div className='flex flex-col'>
                         {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px] mb-10 rounded-full" /></div>:<label htmlFor="image">

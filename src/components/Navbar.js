@@ -1,13 +1,25 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import MobNav from "./MobNav";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import { Link } from "react-router-dom";
 import MonochromePhotosIcon from "@mui/icons-material/MonochromePhotos";
 import PersonIcon from "@mui/icons-material/Person";
 import { Button, Menu, MenuItem } from '@material-ui/core';
-
+import { app, database, storage } from './firebaseConfig'
+import { collection, addDoc,getDoc, getDocs, doc, updateDoc, deleteDoc ,onSnapshot,query,where,setDoc, serverTimestamp} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+import { Autocomplete, TextField } from "@mui/material";
+
 function Navbar({newid,setnewid}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,6 +41,32 @@ function Navbar({newid,setnewid}) {
     setnewid(user.uid)
     nav("/profile")
 }
+  const [profilesearch,setprofilesearch]=useState([]);
+  const collectionRef = collection(database, 'users');
+  useEffect(()=>{
+    handleSearch();
+  },[])
+  const handleSearch= async ()=>{
+   
+    try{
+    const querySnapshot = await getDocs(collectionRef,'users');
+      var temp=[];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // setuser(doc.data())
+        console.log(doc.data());
+        temp.push({id:doc.data().uid,label:doc.data().name});
+        
+      });
+
+      setprofilesearch([...temp])
+      
+    }
+    catch{
+      // seterr(true)
+    }
+  }
+
   return (
     <div className="bg-black opacity-70 fixed">
       <div className="h-[100px] w-[100px] top-10 right-2.5 p-8 scale-150 md:hidden ">
@@ -96,20 +134,37 @@ function Navbar({newid,setnewid}) {
                   ></path>
                 </svg>
               </div>
-              <input
+              {/* <input
                 type="search"
                 id="default-search"
                 class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search "
                 required
-              ></input>
-              <button
+                onChange={(e)=>{handleSearch(e.target.value)}}
+              ></input> */}
+
+<Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={profilesearch}
+      onChange={(e,index)=>{
+        setnewid(index.id)
+        nav("/profile")
+      }}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField  {...params} label="Movie" />}
+    />
+              
+              {/* <button
                 type="submit"
                 class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Search
-              </button>
+              </button> */}
+
+              
             </div>
+           
           </form>
           {/* done */}
           

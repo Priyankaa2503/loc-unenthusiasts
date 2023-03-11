@@ -15,6 +15,13 @@ export default function EventCard() {
   useEffect(() => {
     getEvents()
   }, [])
+
+  const handleReject=()=>{
+
+  }
+  const handleAccept=()=>{
+    
+  }
   
   const auth = getAuth();
   const user = auth.currentUser;
@@ -30,27 +37,18 @@ export default function EventCard() {
         setthons(data.docs);
       })
     }
+    const getoutEvents=()=>{
+      const nameQuery=query(collectionRef,where("from","==",user.uid))
+      onSnapshot(nameQuery,(data)=>{
+        setthons(data.docs);
+      })
+    }
   return (
     <div className="">
-    {/* <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-    <AccordionSummary
-      expandIcon={<ExpandMoreIcon />}
-      aria-controls="panel1bh-content"
-      id="panel1bh-header"
-    >
-      <Typography sx={{ width: '33%', flexShrink: 0 }}>
-        General settings
-      </Typography>
-      <span className="flex gap-8">
-      <button onClick >✓</button>
-      <button onClick >X</button>
-
-      </span>
-    </AccordionSummary>
-    <AccordionDetails>
-  jbjkb
-    </AccordionDetails>
-  </Accordion> */}
+      <div className="flex flex-row gap-8 p-10 justify-center items-center">
+        <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out" onClick={getEvents}>INCOMING EVENTS</button>
+        <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out" onClick={getoutEvents}>OUTGOING EVENTS</button>
+        </div>
   {
             thons.map((note) => {
                 let id=note.id;
@@ -65,8 +63,8 @@ export default function EventCard() {
         {noted.Title}
       </Typography>
       <span className="flex gap-8">
-      <button onClick >✓</button>
-      {!note.accepted && <button onClick >X</button>}
+      <button onClick={handleAccept} >✓</button>
+      {!note.accepted && <button onClick={handleReject} >X</button>}
 
       </span>
     </AccordionSummary>

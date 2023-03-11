@@ -74,6 +74,13 @@ export default function SignUp() {
         const user = result.user;
         // const user=userCredential.user;
         console.log(user);
+        setDoc(doc(database, "users", user.uid), {
+          uid:user.uid,
+          name: user.displayName,
+          email: user.email,
+          posts:[]
+        })
+        setDoc(doc(database,'userchats',user.uid),{})
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Login from "./Login/signup/Login";
 import Signup from "./Login/signup/Signup";
 import Home from "./pages/Home";
+import Chats from './components/Chats';
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/explore" element={<Landing />}></Route>
           <Route path="/footer" element={<Footer />}></Route>
+          <Route path="/chats" element={<Chats />}></Route>
         </Routes>
       </Router>
     </div>

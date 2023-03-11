@@ -94,10 +94,10 @@ export const Profile = ({newid,setnewid}) => {
     return (
         <div>
             <Navbar newid={newid} setnewid={setnewid} />
-            <div className="flex flex-row bg-profileBg p-48 h-screen w-screen bg-cover bg-no-repeat">
+            <div className="flex flex-row bg-profilebg p-48 h-screen bg-cover bg-no-repeat">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
-                    <div className='flex flex-col'>
-                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px] mb-10 rounded-full" /></div>:<label htmlFor="image">
+                    <div className='flex flex-col gap-4 items-center'>
+                        {fireuser?.imageURL?<div className=''><img src={fireuser?.imageURL} className="h-[200px] w-[200px] rounded-full shadow-lg shadow-black" /></div>:<label htmlFor="image">
                         <img src={ProfilePic} className="h-[200px] w-[200px] mb-10" />
                         </label>}
                         <input
@@ -107,47 +107,34 @@ export const Profile = ({newid,setnewid}) => {
                             placeholder="Upload Photo"
                             onChange={(event) => onChangefile(event)}
                             name="image"
-                            
+                           
                         />
-                        <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{ mt: 10, mb: 2 }}
-                        onClick={handleUpdateImage}
-                        className="w-64"
-                    >
-                        Update Profile Picture
-                    </Button>
-                        <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
+                         <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"  onClick={handleUpdateImage}>Update Profile Picture</button>
+                        
+                        <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4  shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
                     </div>
                 </div>
-                <div className="flex flex-col h-[100%] bg-[#00000050] w-[60%] p-8">
-                    <div className='flex flex-row h-[20px] w-100%'>
-                        <div className='mr-16 text-2xl font-bold text-white'>Name</div>
-                        <div className='text-2xl font-bold text-white'>{user.displayName}</div>
+                <div className="flex flex-col h-[100%] bg-[#deebe1] shadow-md shadow-black rounded-xl w-[50%] p-8 gap-4">
+                    <div className='flex flex-row  justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Name:</div>
+                        <div className='  '>{user.displayName}</div>
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>E-mail</div>
-                        <div className='text-2xl font-bold text-white'>{user.email}</div>
+                    <div className='flex flex-row justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Email:</div>
+                        <div className='  '>{user.email}</div>
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>Bio</div>
-                        {fireuser?.bio ? <div className='text-2xl font-bold text-white'>{fireuser.bio}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="bio"></input>}
+                    
+                    <div className='flex flex-row  justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Bio:</div>
+                        {fireuser?.bio ? <div className=''>{fireuser.bio}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="bio"></input>}
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>type</div>
-                        {fireuser?.type ? <div className='text-2xl font-bold text-white'>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
+                    <div className='flex flex-row justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Type:</div>
+                        {fireuser?.type ? <div className=''>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
+                       
                     </div>
                     <div className='mt-6'>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        onClick={handleUpdate}
-                        className="w-64"
-                    >
-                        Update Profile
-                    </Button>
+                    <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"  onClick={handleUpdate}>Update Profile</button>
                     </div>
                 </div>
             </div>

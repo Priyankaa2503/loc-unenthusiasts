@@ -49,52 +49,68 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
   //     // console.log(arr[Math.floor(Math.random()*arr.length)]);
         for(var i=0;i<10;){
           
-          //   var val=Math.floor(Math.random()*arr.length);
+            var val=Math.floor(Math.random()*arr.length);
 
-          // var id=arr[val].uid;
-          // var postarr=arr[val].posts;
-          // const lorem = new LoremIpsum({
-          //   sentencesPerParagraph: {
-          //     max: 8,
-          //     min: 4
-          //   },
-          //   wordsPerSentence: {
-          //     max: 10,
-          //     min: 4
-          //   }
-          // });
-          // var para=lorem.generateParagraphs(1);
-          // console.log(para);
+          var id=arr[val].uid;
+          var postarr=arr[val].posts;
+          // var tags=arr[val].tags
+          const lorem = new LoremIpsum({
+            sentencesPerParagraph: {
+              max: 8,
+              min: 4
+            },
+            wordsPerSentence: {
+              max: 10,
+              min: 4
+            }
+          });
+          var para=lorem.generateParagraphs(1);
+          console.log(para);
 
           const options2 = {
             method: 'POST',
             url: 'https://hydra-ai.p.rapidapi.com/dev/image-analysis/multilabel',
             headers: {
               'content-type': 'application/json',
-              'X-RapidAPI-Key': 'fc9ac53e3amsh7f0c55372e6f0bep1224a8jsn1e1b9847a5de',
+              'X-RapidAPI-Key': '05a69e41edmsha67e45c49afa614p11bbe3jsn12819044cc55',
               'X-RapidAPI-Host': 'hydra-ai.p.rapidapi.com'
             },
             data: `{"image":"https://picsum.photos/id/${i+10}/652/360"}`
           };
 
           await axios.request(options2).then(async function (response) {
-            console.log(response.data)
+            console.log(response.data.body);
+            var tags=[];
+
+            const sortable = Object.entries(response.data.body.image_classification)
+    .sort(([,a],[,b]) => b-a)
+            console.log(sortable[0][0],'sortable')
+            const myArray =sortable[0][0].split(',');
+            console.log(myArray)
+            tags.push(myArray[0]);
+            const myArray2 =sortable[1][0].split(',');
+            // console.log(myArray)
+            tags.push(myArray2[0]);
+            console.log(tags)
+
             i++;
-            // const docq=await addDoc(collectionRef, {
-            //   createdby: id,
-            //   name:arr[val].name,
-            //   url:`https://picsum.photos/id/${i+10}/652/360`,
-            //   caption:para,
-            //   likes:Math.floor(Math.random() * 100)
+            const docq=await addDoc(collectionRef, {
+              createdby: id,
+              name:arr[val].name,
+              url:`https://picsum.photos/id/${i+10}/652/360`,
+              caption:para,
+              likes:Math.floor(Math.random() * 100),
+              tags:tags
               
   
-            // })
-            // postarr.push(docq.id);
-            // const doctoupdate = doc(database, 'users', id)
-            // updateDoc(doctoupdate, {
-            //   posts:postarr,
+            })
+            postarr.push(docq.id);
+            const doctoupdate = doc(database, 'users', id)
+            updateDoc(doctoupdate, {
+              posts:postarr,
+             
               
-            // })
+            })
   
           }).catch(function (error) {
             i= -1;

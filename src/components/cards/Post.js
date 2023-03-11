@@ -136,7 +136,9 @@ else{
                 <div className='flex flex-col'>
                     <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>{data.caption}</div>
                     <div className='text-[#2f2e2e] mt-2 text-xl font-playfair justify-between flex flex-row'>
-                        <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                        <p className='text-m text-[#2f2e2e] font-grotesk mt-2 flex gap-2  '>{data.tags.map((item)=>{return<p class="bg-transparent  text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded">
+ # {item}
+</p> })}</p>
                         <  ShoppingCartIcon onClick={()=>{handlePayment("rzp_test_Pw7oOZCGeCRVYw",data.name)}} />
                     </div>
                 </div>

@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],
+        ibm: ["IBM Plex Serif", "sans-serif"],
         
         
       },
@@ -23,7 +24,7 @@ module.exports = {
       },
       backgroundImage: {
         'bghome': "url('/src/assets/bghome.png')",
-        'bannerBg':"url('/src/assets/banner-bg.jpeg')",
+        'bannerBg':"url('/src/assets/creativity.png')",
         'eventsbg':"url('/src/assets/events.jpg')",
         
       }

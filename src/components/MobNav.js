@@ -9,11 +9,11 @@ const MobNav = ({showMenu,active}) =>
     <div className={active ? 'absolute flex flex-col items-end inset-4 gap-6 md:hidden':'hidden'}>
          <CloseTwoToneIcon  style={{ color: "#000000" }} onClick={showMenu} className='h-[100px] w-[100px] mt-4 scale-150 cursor-pointer'/>
       
-                            <Link to ="/explore"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">EXPLORE</div></Link>
-                            <Link to ="/gallery"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">GALLERY</div></Link>
-                            <Link to ="/events"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">EVENTS</div></Link>
-                            <Link to ="/chat"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">CHAT</div></Link>
-                            <Link to ="/aboutus"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">ABOUT US</div></Link>
+         <Link to ="/explore"><div className=" hover:scale-110 transition duration-300 ease-in-out  text-[#8da193] text-xl font-medium font-jost ">EXPLORE</div></Link>
+                            <Link to ="/gallery"><div className=" hover:scale-110 transition duration-300 ease-in-out  text-[#8da193] text-xl font-medium font-jost ">GALLERY</div></Link>
+                            <Link to ="/events"><div className=" hover:scale-110 transition duration-300 ease-in-out  text-[#8da193] text-xl font-medium font-jost ">EVENTS</div></Link>
+                            <Link to ="/chat"><div className=" hover:scale-110 transition duration-300 ease-in-out  text-[#8da193] text-xl font-medium font-jost ">CHAT</div></Link>
+                            <Link to ="/aboutus"><div className=" hover:scale-110 transition duration-300 ease-in-out text-[#8da193] text-xl font-medium font-jost ">ABOUT US</div></Link>
 
                        
     </div>

@@ -66,18 +66,29 @@ export const Profile = ({ newid, setnewid }) => {
   
 
   const getImages = async () => {
-    const collectionRef = collection(database, 'images');
-    const nameQuery = query(collectionRef, where("createdby", "==", newid))
-    var arr = [];
-    await getDocs(nameQuery)
-      .then((res) => {
-        console.log(res);
-        res.docs.map((item) => {
-          arr.push({ array: item.data(), id: item.id });
-          console.log(item.id)
-        })
-      })
-    setcardarr([...arr]);
+    
+    const q = query(collection(database, "images"), where("createdby", "==", newid));
+const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const cities = [];
+  var arr = [];
+  querySnapshot.forEach((item) => {
+    arr.push({ array: item.data(), id: item.id });
+  });
+  setcardarr([...arr]);
+//   console.log("Current cities in CA: ", cities.join(", "));
+});
+    // const collectionRef = collection(database, 'images');
+    // const nameQuery = query(collectionRef, where("createdby", "==", newid))
+    // var arr = [];
+    // await getDocs(nameQuery)
+    //   .then((res) => {
+    //     console.log(res);
+    //     res.docs.map((item) => {
+    //       arr.push({ array: item.data(), id: item.id });
+    //       console.log(item.id)
+    //     })
+    //   })
+    // setcardarr([...arr]);
   }
 
   const onChangefile = (e) => {

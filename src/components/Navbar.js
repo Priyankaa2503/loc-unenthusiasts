@@ -20,7 +20,7 @@ import {
 } from "firebase/auth";
 import { Autocomplete, TextField } from "@mui/material";
 
-function Navbar() {
+function Navbar({newid,setnewid}) {
   let nav = useNavigate();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -146,8 +146,12 @@ function Navbar() {
       disablePortal
       id="combo-box-demo"
       options={profilesearch}
+      onChange={(e,index)=>{
+        setnewid(index.id)
+        nav("/profile")
+      }}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={(params) => <TextField  {...params} label="Movie" />}
     />
               
               {/* <button

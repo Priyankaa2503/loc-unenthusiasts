@@ -7,17 +7,8 @@ import PersonIcon from "@mui/icons-material/Person";
 
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-} from "firebase/auth";
-function Navbar() {
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+function Navbar({newid,setnewid}) {
   let nav = useNavigate();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -25,6 +16,10 @@ function Navbar() {
   const showMenu = () => {
     setActive(!active);
   };
+  const handlecuruserprofile=()=>{
+    setnewid(user.uid)
+    nav("/profile")
+}
   return (
     <div className="bg-black opacity-70 fixed">
       <div className="h-[100px] w-[100px] top-10 right-2.5 p-8 scale-150 md:hidden ">
@@ -39,6 +34,7 @@ function Navbar() {
             <span className=" font-bold">PHOTO</span>
             <span className=" font-light ">graphy</span>
           </div>
+            
         </div>
         {/* <div className="flex flex-row justify-end items-center "> */}
 
@@ -63,6 +59,15 @@ function Navbar() {
               CHAT
             </div>
           </Link>
+          <div onClick={handlecuruserprofile} className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            onClick={()=>{signOut(auth); nav("/")}}
+                        >
+                            Log Out
+                        </Button>
           {/* search field */}
 
           <form>

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import DrawerComp from "./Drawer";
+import Photo from "../assets/photography.png";
 const Header = () => {
   const [value, setValue] = useState();
   const theme = useTheme();
@@ -20,9 +21,10 @@ const Header = () => {
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#063970" }}>
+      <AppBar sx={{ background: "transparent" }} >
         <Toolbar>
-          <AddBusinessRoundedIcon sx={{ transform: "scale(2)" }} />
+         
+          <img src={Photo} alt='logo' className='h-[40px] w-[40px]'/>
           {isMatch ? (
             <>
               <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
@@ -33,23 +35,24 @@ const Header = () => {
           ) : (
             <>
               <Tabs
-                sx={{ marginLeft: "auto" }}
+                sx={{ marginLeft: "auto"}}
                 indicatorColor="secondary"
                 textColor="inherit"
+                
                 value={value}
                 onChange={(e, value) => setValue(value)}
+                className="text-black"
+               
               >
-                <Tab label="Products" />
-                <Tab label="Services" />
+                <Tab label="Explore" />
+                <Tab label="Gallery" />
+                <Tab label="Chat" />
                 <Tab label="About Us" />
-                <Tab label="Contact" />
               </Tabs>
-              <Button sx={{ marginLeft: "auto" }} variant="contained">
-                Login
-              </Button>
-              <Button sx={{ marginLeft: "10px" }} variant="contained">
-                SignUp
-              </Button>
+              <span>Username</span>
+              
+            
+          
             </>
           )}
         </Toolbar>

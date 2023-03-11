@@ -7,15 +7,19 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import useRazorpay from 'react-razorpay';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export const Post=({id,imageurl,caption,name,likes})=>{
+export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
+  let nav=useNavigate()
 
     const handleGotoProfile=()=>{
-
+      setnewid(createdby)
+      nav("/profile")
+      console.log(createdby);
     }
 
     useEffect(() => {

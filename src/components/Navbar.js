@@ -28,6 +28,10 @@ function Navbar() {
   const showMenu = () => {
     setActive(!active);
   };
+  const handlecuruserprofile=()=>{
+    setnewid(user.uid)
+    nav("/profile")
+}
   const [profilesearch,setprofilesearch]=useState([]);
   const collectionRef = collection(database, 'users');
   useEffect(()=>{
@@ -68,6 +72,7 @@ function Navbar() {
             <span className=" font-bold">PHOTO</span>
             <span className=" font-light ">graphy</span>
           </div>
+            
         </div>
         {/* <div className="flex flex-row justify-end items-center "> */}
 
@@ -92,6 +97,15 @@ function Navbar() {
               CHAT
             </div>
           </Link>
+          <div onClick={handlecuruserprofile} className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            onClick={()=>{signOut(auth); nav("/")}}
+                        >
+                            Log Out
+                        </Button>
           {/* search field */}
 
           <form>

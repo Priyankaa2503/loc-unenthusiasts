@@ -135,10 +135,10 @@ const options = {
  }
 export default function Home() {
   return (
-    <div className="bg-bghome h-screen">
+    <div className="bg-bghome h-screen bg-no-repeat">
       <div className="flex flex-col justify-center items-center gap-32 h-screen ">
        
-        <span className="text-white text-5xl font-jost">PHOTOGRAPHY</span>
+        <span className="text-white text-[70px] text-center font-medium mt-24 font-jost">Bringing your vision to life,<br/> one shot at a time</span>
         {/* <button onClick={()=>{adddata()}}>
         images
         </button> */}

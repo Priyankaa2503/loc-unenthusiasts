@@ -28,6 +28,7 @@ module.exports = {
         'eventsbg':"url('/src/assets/events.jpg')",
         'profileBg':"url('/src/assets/profileBg.jpeg')",
       }
+      
     },
   },
   plugins: [],

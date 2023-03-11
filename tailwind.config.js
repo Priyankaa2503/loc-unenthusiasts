@@ -18,6 +18,9 @@ module.exports = {
         white:"#FFFFFF"
       
       },
+      backgroundImage:{
+        'bannerBg':"url('/src/assets/banner-bg.jpeg')",
+      }
     },
   },
   plugins: [],

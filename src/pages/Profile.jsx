@@ -12,6 +12,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 
+
 export const Profile = () => {
     const [data, setdata] = useState({});
     const auth = getAuth();
@@ -85,28 +86,29 @@ export const Profile = () => {
     return (
         <div>
             <Navbar />
-            <div className="flex flex-row bg-profileBg p-48 h-screen w-screen bg-cover bg-no-repeat">
+            <div className="flex flex-row bg-profileBg p-48 h-screen bg-cover bg-no-repeat">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
                     <div className='flex flex-col'>
-                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px]" /></div>:<label htmlFor="image">
-                        <img src={ProfilePic} className="h-[200px] w-[200px]" />
+                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px] mb-10 rounded-full" /></div>:<label htmlFor="image">
+                        <img src={ProfilePic} className="h-[200px] w-[200px] mb-10" />
                         </label>}
                         <input
-                        className='none'
+                        className='hidden'
                             id='image'
                             type="file"
                             placeholder="Upload Photo"
                             onChange={(event) => onChangefile(event)}
                             name="image"
+                            
                         />
                         <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 10, mb: 2 }}
                         onClick={handleUpdateImage}
+                        className="w-64"
                     >
-                        Update Profile
+                        Update Profile Picture
                     </Button>
                         <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
                     </div>
@@ -128,22 +130,30 @@ export const Profile = () => {
                         <div className='mr-16 text-2xl font-bold text-white'>type</div>
                         {fireuser?.type ? <div className='text-2xl font-bold text-white'>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
                     </div>
+                    <div className='mt-6'>
                     <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         onClick={handleUpdate}
+                        className="w-64"
                     >
-                        Update Profile Picture
+                        Update Profile
                     </Button>
+                    </div>
                 </div>
             </div>
-            {/* <div class="">
+            <div class="">
   <form class="bg-white p-6 rounded-lg shadow-md">
     <div class="mb-4">
       <label class="block text-gray-700 font-bold mb-2" for="caption">
         Caption
+      </label>
+      <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="caption">
+        Description
       </label>
       <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
     </div>
@@ -154,16 +164,16 @@ export const Profile = () => {
       <input class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image" id="image"></input>
       </div>
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="tags">
-        Tags
-      </label>
+     
     
-    
-      <select class="form-multiselect block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple id="tags" name="tags[]">
-        <option value="tag1">Tag 1</option>
-        <option value="tag2">Tag 2</option>
-        <option value="tag3">Tag 3</option>
-      </select>
+      <div class="flex flex-wrap">
+  <label for="tags" class="block text-gray-700 text-sm font-bold mb-2 mr-2">
+    Tags:
+  </label>
+  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 1"></input>
+  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 2"></input>
+</div>
+
     </div>
     <div class="flex justify-end">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -171,7 +181,7 @@ export const Profile = () => {
       </button>
     </div>
   </form>
-</div> */}
+</div>
 
             <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">
                 <p className="font-jost text-black font-bold text-[100px] mt-10 p-10">My Gallery</p>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   AppBar,
@@ -14,6 +15,7 @@ import {
 import DrawerComp from "./Drawer";
 import Photo from "../assets/photography.png";
 const Header = () => {
+  let nav=useNavigate()
   const [value, setValue] = useState();
   const theme = useTheme();
   console.log(theme);

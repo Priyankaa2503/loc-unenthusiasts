@@ -8,8 +8,11 @@ import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapsh
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Post } from "./cards/Post"
 import {React, useEffect, useState } from "react";
+import { Autocomplete, TextField } from '@mui/material';
 export const Explore=({newid,setnewid})=>{
     const [cardarr,setcardarr]=useState([]);
+    const [ids,setids]=useState([]);
+    const [ind,setind]=useState(0);
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
         var arr=[];
@@ -21,26 +24,96 @@ export const Explore=({newid,setnewid})=>{
                 console.log(item.id)
                }) 
             })
-            setcardarr([...arr]);
+
+
+            var tags=[];
+            var arrar=[];
+            
+              await getDocs(collectionRef).then((res)=>{
+                res.docs.map((item)=>{
+                  item.data().tags.map((tagitem)=>{
+                    if(tags.includes(tagitem)){
+                        var ind=tags.indexOf(tagitem)
+                        // console.log(ind);
+                      arrar[ind].push({array:item.data(), id:item.id})
+                    }
+                    else{
+                      tags.push(tagitem);
+                    //   arrar.push(tagitem);
+                      
+                    //   console.log(ind)
+                      arrar[arrar.length]=[{array:item.data(), id:item.id}];
+                    }
+                    // console.log(arrar)
+                   
+                  })
+                })
+          
+              })
+             var newarr=[];
+             newarr[0]=arr;
+             var newtag=[];
+             newtag[0]={label:'all',ind:0};
+             arrar.map((item,index)=>{
+                newarr[index+1]=item;
+                newtag[index+1]={label:tags[index],ind:index+1};
+                         })
+             console.log(newarr,newtag);
+
+
+            //   console.log(arrar);
+            //   console.log(tags);
+            setcardarr([...newarr]);
+            setids([...newtag]);
+            
     }
     console.log(cardarr);
     useEffect(()=>{
        getImages();
 
     },[])
+    let index = cardarr.indexOf("alp");
     return(
-        <div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
-           {
-            cardarr?.map((item,index)=>{
-                console.log(item.array);
-                return (
+        <div>
+             <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={ids}
+      onChange={(e,index)=>{
+        // setnewid(index.id)
+        // setind(index)
+        console.log(index.ind);
+        setind(index.ind)
+        // nav("/profile")
+      }}
+      sx={{ width: 300 }}
+    
+      renderInput={(params) => <TextField  {...params} label="Movie" />}
+    />
 
-                    <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} createdby={item.array.createdby} likes={item.array.likes} newid={newid} setnewid={setnewid}/>
+
+<div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
+          
+         
+          {
+           
+           
+           cardarr[ind]?.map((item,index)=>{
+              
+               return (
+
+                   <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} createdby={item.array.createdby} likes={item.array.likes} newid={newid} setnewid={setnewid}/>
 
 
-                 )
-            },[])
-           } 
+                )
+           },[])
+          } 
+       </div>
+
+
+
         </div>
+
+        
     )
 }

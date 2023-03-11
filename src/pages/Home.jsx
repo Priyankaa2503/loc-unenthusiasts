@@ -30,7 +30,28 @@ const options = {
 
 
  
+async function handlesearch(){
+  const collectionRef = collection(database, 'images');
+  const text='alp';
+  var tags=[];
+  var arr=[[]];
+    await getDocs(collectionRef).then((res)=>{
+      res.docs.map((item)=>{
+        item.data().tags.map((tagitem)=>{
+          if(tags.includes(tagitem)){
+            arr[tagitem].push(item.id)
+          }
+          else{
+            tags.push(tagitem);
+            arr[tagitem]=[item.id]
+          }
+         
+        })
+      })
 
+    })
+    console.log(arr);
+  }
 
  async function adddata(){
   const collectionRef = collection(database, 'images');
@@ -46,12 +67,12 @@ const options = {
       console.log(arr);
 
       // console.log(arr[Math.floor(Math.random()*arr.length)]);
-        for(var i=0;i<100;i++){
+        for(var i=0;i<10;){
           
             var val=Math.floor(Math.random()*arr.length);
 
           var id=arr[val].uid;
-          var postarr=arr[val].posts;
+          var postarr=arr[val].posts? arr[val].posts : [];
           // var tags=arr[val].tags
           const lorem = new LoremIpsum({
             sentencesPerParagraph: {
@@ -71,7 +92,7 @@ const options = {
             url: 'https://hydra-ai.p.rapidapi.com/dev/image-analysis/multilabel',
             headers: {
               'content-type': 'application/json',
-              'X-RapidAPI-Key': '05a69e41edmsha67e45c49afa614p11bbe3jsn12819044cc55',
+              'X-RapidAPI-Key': '48334e4faemsh146b66580f9c961p13d654jsnfb3484c3b23a',
               'X-RapidAPI-Host': 'hydra-ai.p.rapidapi.com'
             },
             data: `{"image":"https://picsum.photos/id/${i+10}/652/360"}`
@@ -88,7 +109,7 @@ const options = {
             console.log(myArray)
             tags.push(myArray[0]);
             const myArray2 =sortable[1][0].split(',');
-            // console.log(myArray)
+            console.log(myArray)
             tags.push(myArray2[0]);
             console.log(tags)
 
@@ -115,69 +136,16 @@ const options = {
             i= -1;
             console.error(error);
           });
-          var para=lorem.generateParagraphs(1);
-          console.log(para);
+          if(i===-1){
+            console.log('what')
+            break;
+          }
           
-          const docq=await addDoc(collectionRef, {
-            createdby: id,
-            name:arr[val].name,
-            url:`https://picsum.photos/id/${i+10}/652/360`,
-            caption:para,
-            likes:Math.floor(Math.random() * 100)
-
-
-          })
-          postarr.push(docq.id);
-          const doctoupdate = doc(database, 'users', id)
-          updateDoc(doctoupdate, {
-            posts:postarr,
-            
-          })
-
 
 
 
         }
-        //   console.log(response.data.body.image_classification);
-        // res.data.map(async (item)=>{
-        //   var val=Math.floor(Math.random()*arr.length);
-
-        //   var id=arr[val].uid;
-        //   var postarr=arr[val].posts;
-        //   const lorem = new LoremIpsum({
-        //     sentencesPerParagraph: {
-        //       max: 8,
-        //       min: 4
-        //     },
-        //     wordsPerSentence: {
-        //       max: 10,
-        //       min: 4
-        //     }
-        //   });
-        //   var para=lorem.generateParagraphs(1);
-        //   console.log(para);
-          
-        //   const docq=await addDoc(collectionRef, {
-        //     createdby: id,
-        //     name:arr[val].name,
-        //     url:item.url,
-        //     caption:para
-
-
-        //   })
-        //   postarr.push(docq.id);
-        //   const doctoupdate = doc(database, 'users', id)
-        //   updateDoc(doctoupdate, {
-        //     posts:postarr
-        //   })
-        
-        //   console.log(docq.id)
-          
-           
-
-        // })
       
-
 
 
 

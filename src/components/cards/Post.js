@@ -9,11 +9,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where} from "firebase/firestore";
+import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where, arrayRemove} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
+  const auth = getAuth();
+  const user = auth.currentUser;
   let nav=useNavigate()
 
     const handleGotoProfile=()=>{
@@ -111,7 +113,14 @@ console.log(docSnap.data());
 
     },[])
    
-        
+        const handleDelete=()=>{
+          const doctoupdate = doc(database, 'images', id)
+    deleteDoc(doctoupdate)
+    const doctoupdate2 = doc(database, 'users', createdby)
+    updateDoc(doctoupdate2, {
+      posts:arrayRemove(id)
+    })
+        }
     
     function handleClick() {
         setIsShown(current => !current);
@@ -145,6 +154,7 @@ else{
 }
     }
 
+
     return(
       
         <div className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
@@ -153,6 +163,7 @@ else{
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div onClick={handleLike} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
+                    {createdby===user.uid && <div onClick={handleDelete} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>Delete post</span></div>}
                     <div className='text-[#A7727D] font-grotesk' onClick={handleClick} style={{cursor:"pointer"}}>View More<ArrowDropDownIcon/></div>
                 </div>
                 {isShown &&(

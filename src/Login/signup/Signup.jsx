@@ -14,6 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { app, database, storage } from '../../components/firebaseConfig'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc,setDoc, onSnapshot, query, where } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button'
 
 function Copyright(props) {
@@ -46,6 +49,12 @@ export default function SignUp() {
       console.log(data.get("firstName")+" "+data.get("lastName"));
       updateProfile(user,{
         displayName: data.get("firstName")+" "+data.get("lastName")
+      })
+      setDoc(doc(database, "users", user.uid), {
+        uid:user.uid,
+        name: data.get("firstName")+" "+data.get("lastName"),
+        email: data.get('email'),
+        posts:[]
       })
     })
     .catch((error) => {

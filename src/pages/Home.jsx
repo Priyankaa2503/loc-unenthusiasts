@@ -1,28 +1,27 @@
 import axios from 'axios';
-// import Razorpay from 'razorpay';
 import { LoremIpsum } from "lorem-ipsum";
-import React, { useEffect,useCallback } from 'react'
+import React from 'react'
 import { app, database, storage } from '../components/firebaseConfig'
-import useRazorpay from "react-razorpay";
+
 import { Link} from 'react-router-dom'
-// import Razorpay from 'razorpay'
-// rzp_test_Pw7oOZCGeCRVYw
+
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
 
 import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where,setDoc} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import {useRazorpay,createOrder} from "react-razorpay";
-// const options = {
-//   method: 'GET',
-//   url: 'https://picsum.photos/652/360',
-//   // headers: {
-//   //   'content-type': 'application/json',
-//   //   'X-RapidAPI-Key': 'fc9ac53e3amsh7f0c55372e6f0bep1224a8jsn1e1b9847a5de',
-//   //   'X-RapidAPI-Host': 'hydra-ai.p.rapidapi.com'
-//   // },
-//   // data: '{"image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsewZDwDJGKDR-ZO4Rmf9vUUKWjyArPPIqqzu4WDGDOA&s"}'
-// };
+
+const options = {
+  method: 'GET',
+  url: 'https://picsum.photos/652/360',
+  // headers: {
+  //   'content-type': 'application/json',
+  //   'X-RapidAPI-Key': 'fc9ac53e3amsh7f0c55372e6f0bep1224a8jsn1e1b9847a5de',
+  //   'X-RapidAPI-Host': 'hydra-ai.p.rapidapi.com'
+  // },
+  // data: '{"image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsewZDwDJGKDR-ZO4Rmf9vUUKWjyArPPIqqzu4WDGDOA&s"}'
+};
 
 
 
@@ -44,10 +43,10 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
        }) 
 
       });
-  //     console.log(arr);
+      console.log(arr);
 
-  //     // console.log(arr[Math.floor(Math.random()*arr.length)]);
-        for(var i=0;i<10;){
+      // console.log(arr[Math.floor(Math.random()*arr.length)]);
+        for(var i=0;i<100;i++){
           
             var val=Math.floor(Math.random()*arr.length);
 
@@ -116,12 +115,25 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
             i= -1;
             console.error(error);
           });
-
-          if(i===-1){
-            break
-          }
+          var para=lorem.generateParagraphs(1);
+          console.log(para);
           
-         
+          const docq=await addDoc(collectionRef, {
+            createdby: id,
+            name:arr[val].name,
+            url:`https://picsum.photos/id/${i+10}/652/360`,
+            caption:para,
+            likes:Math.floor(Math.random() * 100)
+
+
+          })
+          postarr.push(docq.id);
+          const doctoupdate = doc(database, 'users', id)
+          updateDoc(doctoupdate, {
+            posts:postarr,
+            
+          })
+
 
 
 
@@ -166,24 +178,6 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
         // })
       
 
-        // const axios = require("axios");
-
-// const encodedParams = new URLSearchParams();
-// encodedParams.append("function_type", "<REQUIRED>");
-
-// const options = {
-//   method: 'POST',
-//   url: "https://quickchart.io/watermark?mainImageUrl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F6%2F6e%2FGolde33443.jpg&markImageUrl=https%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2016%2F10%2FBatman-logo.png&markRatio=0.25",
- 
-  
-// };
-
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });
-
 
 
 
@@ -192,21 +186,14 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
   
  }
-
- 
-
 export default function Home() {
-
-
-
   return (
-    <div className="bg-bghome h-screen">
+    <div className="bg-bghome h-screen bg-no-repeat">
       <div className="flex flex-col justify-center items-center gap-32 h-screen ">
        
-        <span className="text-white text-5xl font-jost">PHOTOGRAPHY</span>
-        {/* <Wallet></Wallet> */}
-        <button onClick={adddata} >
-asfcsdzgvwesdfwESDFwef
+        <span className="text-white text-[70px] text-center font-medium mt-24 font-jost">Bringing your vision to life,<br/> one shot at a time</span>
+         <button onClick={()=>{adddata()}}>
+        images
         </button>
         <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="/signup">GET STARTED</Link></button>
       </div>

@@ -14,6 +14,23 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const Post=({id,imageurl,caption,name,likes})=>{
 
+    const handleGotoProfile=()=>{
+
+    }
+
+    useEffect(() => {
+      const unsub = onSnapshot(
+        doc(database, "images", id), 
+        { includeMetadataChanges: true }, 
+        (doc) => {
+            console.log(doc.data(),'asgdargsd');
+            setdata({...doc.data()});
+        });
+    }, [])
+    
+    
+   
+        
     const [clicked,setclicked]=useState(0);
     const [text, setText] = useState('View More');
     const [isShown, setIsShown] = useState(false);
@@ -124,9 +141,9 @@ else{
     }
 
     return(
-        <div  className='mt-10 ml-10 bg-white p-6 w-[640px]'>
-            <div className="flex flex-row gap-2"><AccountCircleIcon/><span>{data.name}</span></div>
-            <img id='post' src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-3'></img>
+        <div className='mt-10 ml-10 bg-white p-6 w-[640px]'>
+            <div className="flex flex-row gap-2" onClick={handleGotoProfile}><AccountCircleIcon/><span>{data.name}</span></div>
+            <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-3'></img>
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div onClick={handleLike} className='text-[#2f2e2e] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>

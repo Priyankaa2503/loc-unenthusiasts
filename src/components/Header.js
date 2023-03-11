@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   AppBar,
   Button,
@@ -9,7 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
+
 import DrawerComp from "./Drawer";
 import Photo from "../assets/photography.png";
 const Header = () => {
@@ -27,21 +28,21 @@ const Header = () => {
           <img src={Photo} alt='logo' className='h-[40px] w-[40px]'/>
           {isMatch ? (
             <>
-              <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
+              {/* <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
                 Shoppee
-              </Typography>
+              </Typography> */}
               <DrawerComp />
             </>
           ) : (
             <>
               <Tabs
-                sx={{ marginLeft: "auto"}}
+                sx={{ marginLeft: "auto",marginRight:"auto"}}
                 indicatorColor="secondary"
                 textColor="inherit"
                 
                 value={value}
                 onChange={(e, value) => setValue(value)}
-                className="text-black"
+                className="text-white"
                
               >
                 <Tab label="Explore" />
@@ -49,8 +50,10 @@ const Header = () => {
                 <Tab label="Chat" />
                 <Tab label="About Us" />
               </Tabs>
-              <span>Username</span>
+              <span className="mr-2">Username</span>
+              <AccountCircleIcon/>
               
+
             
           
             </>

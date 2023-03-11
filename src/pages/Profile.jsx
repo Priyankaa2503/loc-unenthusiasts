@@ -12,7 +12,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 
-export const Profile = () => {
+export const Profile = ({newid}) => {
     const [data, setdata] = useState({});
     const auth = getAuth();
     const user = auth.currentUser;
@@ -25,7 +25,7 @@ export const Profile = () => {
 
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
-        const nameQuery=query(collectionRef,where("createdby","==",user.uid))
+        const nameQuery=query(collectionRef,where("createdby","==",newid))
         var arr=[];
           await getDocs(nameQuery)
               .then((res) => {
@@ -44,7 +44,7 @@ export const Profile = () => {
       }
 
     const getfireuser = async () => {
-        const docRef = doc(database, "users", user.uid);
+        const docRef = doc(database, "users", newid);
         const docSnap = await getDoc(docRef);
         setfireuser(docSnap.data())
     }
@@ -56,7 +56,7 @@ export const Profile = () => {
     }
 
     const handleUpdate = () => {
-        const doctoupdate = doc(database, 'users', user.uid)
+        const doctoupdate = doc(database, 'users', newid)
         updateDoc(doctoupdate, {
             bio: data.bio,
             type: data.type
@@ -64,7 +64,7 @@ export const Profile = () => {
     }
 
     const handleUpdateImage = () => {
-        const storageRef = ref(storage, user.uid);
+        const storageRef = ref(storage, newid);
 
         const uploadTask = uploadBytesResumable(storageRef, data.image)
         uploadTask.on('state_changed',
@@ -75,7 +75,7 @@ export const Profile = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               console.log('File available at', downloadURL);
-              await updateDoc(doc(database, "users", user.uid), {
+              await updateDoc(doc(database, "users", newid), {
                 imageURL: downloadURL
               })
             });
@@ -114,11 +114,11 @@ export const Profile = () => {
                 <div className="flex flex-col h-[100%] bg-[#00000050] w-[60%] p-8">
                     <div className='flex flex-row h-[20px] w-100%'>
                         <div className='mr-16 text-2xl font-bold text-white'>Name</div>
-                        <div className='text-2xl font-bold text-white'>{user.displayName}</div>
+                        <div className='text-2xl font-bold text-white'>{fireuser.name}</div>
                     </div>
                     <div className='flex flex-row h-[20px] w-100% mt-12'>
                         <div className='mr-16 text-2xl font-bold text-white'>E-mail</div>
-                        <div className='text-2xl font-bold text-white'>{user.email}</div>
+                        <div className='text-2xl font-bold text-white'>{fireuser.email}</div>
                     </div>
                     <div className='flex flex-row h-[20px] w-100% mt-12'>
                         <div className='mr-16 text-2xl font-bold text-white'>Bio</div>

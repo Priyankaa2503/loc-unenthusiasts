@@ -8,7 +8,7 @@ import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapsh
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Post } from "./cards/Post"
 import {React, useEffect, useState } from "react";
-export const Explore=()=>{
+export const Explore=({newid,setnewid})=>{
     const [cardarr,setcardarr]=useState([]);
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
@@ -35,7 +35,7 @@ export const Explore=()=>{
                 console.log(item.array);
                 return (
 
-                    <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} likes={item.array.likes} />
+                    <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} createdby={item.array.createdby} likes={item.array.likes} newid={newid} setnewid={setnewid}/>
 
 
                  )

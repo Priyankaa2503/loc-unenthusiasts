@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./Login/signup/Login";
@@ -7,7 +8,11 @@ import Home from "./pages/Home";
 import Chats from './components/Chats';
 import Events from "./pages/Events";
 import {Profile} from "./pages/Profile";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 function App() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const [newid, setnewid] = useState(user?.uid)
 
   return (
     <div>
@@ -16,10 +21,10 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/explore" element={<Landing />}></Route>
+          <Route path="/explore" element={<Landing newid={newid} setnewid={setnewid}/>}></Route>
           <Route path="/chats" element={<Chats />}></Route>
           <Route path="/events" element={<Events />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/profile" element={<Profile newid={newid} setnewid={setnewid}/>}></Route>
         </Routes>
       </Router>
     </div>

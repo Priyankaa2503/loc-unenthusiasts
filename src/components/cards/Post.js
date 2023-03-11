@@ -3,7 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useEffect, useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { app, database, storage } from '../firebaseConfig'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
 
 import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where} from "firebase/firestore";
@@ -69,6 +69,7 @@ else{
                 <div className='flex flex-col'>
                     <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>{data.caption}</div>
                     <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                    <DeleteIcon/>
                 </div>
                 )}
             </div>

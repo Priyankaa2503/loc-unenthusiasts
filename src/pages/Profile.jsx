@@ -4,6 +4,7 @@ import { Link} from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import {ProfileBG } from '../assets/profileBg.jpeg'
 import { Post } from '../components/cards/Post'
+
 export const Profile=()=>{
     return(
         <div>
@@ -37,9 +38,9 @@ export const Profile=()=>{
             <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">
                 <p className="font-jost text-white font-bold text-[100px] mt-10 p-10">My Gallery</p>
                 <div className="flex flex-col justify-center ">
-                    {/* <Post/>
+                    {/* <Post />
                     <Post/>
-                    <Post/> */}
+                    // <Post/> */}
                 </div>
             </div>
         </div>

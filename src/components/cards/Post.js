@@ -23,7 +23,9 @@ export const Post=({id,imageurl,caption,name,likes})=>{
         
     const [clicked,setclicked]=useState(0);
     const [text, setText] = useState('View More');
+    const [isShown, setIsShown] = useState(false);
     function handleClick() {
+        setIsShown(current => !current);
         if(text === 'View More'){
           setText('View Less');
         }else{
@@ -63,8 +65,12 @@ else{
                     <div onClick={handleLike} className='text-[#2f2e2e] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
                     <div className='text-[#2f2e2e] font-grotesk' onClick={handleClick}>View More<ArrowDropDownIcon/></div>
                 </div>
-                <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>{data.caption}</div>
-                <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                {isShown &&(
+                <div className='flex flex-col'>
+                    <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>{data.caption}</div>
+                    <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                </div>
+                )}
             </div>
         </div>
     )

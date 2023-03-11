@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from 'react-router-dom'
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -37,6 +38,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  let navigate = useNavigate();
   const auth = getAuth();
   let googleProv = new GoogleAuthProvider()
   const handleGoogle=()=>{
@@ -65,7 +67,8 @@ export default function SignInSide() {
       // // Signed in 
       const user=userCredential.user;
       // ...
-      console.log(user);
+      // console.log(user);
+      navigate('/chats')
     })
     .catch((error) => {
       const errorCode = error.code;

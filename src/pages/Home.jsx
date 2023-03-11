@@ -46,7 +46,7 @@ const options = {
       console.log(arr);
 
       // console.log(arr[Math.floor(Math.random()*arr.length)]);
-        for(var i=0;i<100;i++){
+        for(var i=0;i<10;i++){
           
             var val=Math.floor(Math.random()*arr.length);
 
@@ -192,9 +192,9 @@ export default function Home() {
       <div className="flex flex-col justify-center items-center gap-32 h-screen ">
        
         <span className="text-white text-[70px] text-center font-medium mt-24 font-jost">Bringing your vision to life,<br/> one shot at a time</span>
-         <button onClick={()=>{adddata()}}>
-        images
-        </button>
+         {/* <button onClick={()=>{adddata()}}> */}
+        {/* images
+        </button> */}
         <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="/signup">GET STARTED</Link></button>
       </div>
     </div>

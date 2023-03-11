@@ -31,8 +31,9 @@ import {
 } from "firebase/auth";
 
 export default function EventCard() {
-  const [thons, setthons] = useState([]);
-  const collectionRef = collection(database, "events");
+  const [hide, sethide] = useState(true)
+  const [thons, setthons] = useState([])
+  const collectionRef = collection(database, 'events')
   useEffect(() => {
     getEvents();
   }, []);
@@ -55,18 +56,20 @@ export default function EventCard() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const getEvents = () => {
-    const nameQuery = query(collectionRef, where("to", "==", user.uid));
-    onSnapshot(nameQuery, (data) => {
-      setthons(data.docs);
-    });
-  };
-  const getoutEvents = () => {
-    const nameQuery = query(collectionRef, where("from", "==", user.uid));
-    onSnapshot(nameQuery, (data) => {
-      setthons(data.docs);
-    });
-  };
+    const getEvents=()=>{
+      const nameQuery=query(collectionRef,where("to","==",user.uid))
+      onSnapshot(nameQuery,(data)=>{
+        setthons(data.docs);
+      })
+      sethide(true)
+    }
+    const getoutEvents=()=>{
+      const nameQuery=query(collectionRef,where("from","==",user.uid))
+      onSnapshot(nameQuery,(data)=>{
+        setthons(data.docs);
+      })
+      sethide(false)
+    }
   return (
     <div className="flex flex-col">
       <div className="grid grid-2 gap-8 p-10 justify-center items-center">
@@ -98,7 +101,7 @@ export default function EventCard() {
         {noted.Title}
       </Typography>
       <span className="flex gap-8">
-      <button onClick={()=>{handleAccept(note.id)}} >✓</button>
+    {hide && <button onClick={()=>{handleAccept(note.id)}} >✓</button>}
       {!note.accepted && <button onClick={handleReject} >X</button>}
 
       </span>
@@ -117,6 +120,7 @@ export default function EventCard() {
   </Accordion>;
               })}
 
+  </div>
   </div>
   )
 }

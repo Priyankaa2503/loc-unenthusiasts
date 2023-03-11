@@ -18,8 +18,9 @@ export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
 
     const handleGotoProfile=()=>{
       setnewid(createdby)
-      nav("/profile")
       console.log(createdby);
+      nav("/profile")
+      
     }
 
     useEffect(() => {

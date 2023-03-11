@@ -88,25 +88,26 @@ export const Profile = ({newid}) => {
             <div className="flex flex-row bg-profileBg p-48 h-screen w-screen bg-cover bg-no-repeat">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
                     <div className='flex flex-col'>
-                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px]" /></div>:<label htmlFor="image">
-                        <img src={ProfilePic} className="h-[200px] w-[200px]" />
+                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px] mb-10 rounded-full" /></div>:<label htmlFor="image">
+                        <img src={ProfilePic} className="h-[200px] w-[200px] mb-10" />
                         </label>}
                         <input
-                        className='none'
+                        className='hidden'
                             id='image'
                             type="file"
                             placeholder="Upload Photo"
                             onChange={(event) => onChangefile(event)}
                             name="image"
+                            
                         />
                         <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 10, mb: 2 }}
                         onClick={handleUpdateImage}
+                        className="w-64"
                     >
-                        Update Profile
+                        Update Profile Picture
                     </Button>
                         <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
                     </div>
@@ -128,15 +129,17 @@ export const Profile = ({newid}) => {
                         <div className='mr-16 text-2xl font-bold text-white'>type</div>
                         {fireuser?.type ? <div className='text-2xl font-bold text-white'>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
                     </div>
+                    <div className='mt-6'>
                     <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         onClick={handleUpdate}
+                        className="w-64"
                     >
-                        Update Profile Picture
+                        Update Profile
                     </Button>
+                    </div>
                 </div>
             </div>
             <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">

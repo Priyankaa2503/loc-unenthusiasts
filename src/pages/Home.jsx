@@ -1,20 +1,39 @@
-import axios from 'axios';
+import axios from "axios";
 import { LoremIpsum } from "lorem-ipsum";
-import React from 'react'
-import { app, database, storage } from '../components/firebaseConfig'
+import React from "react";
+import { app, database, storage } from "../components/firebaseConfig";
 
-import { Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
-
-import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where,setDoc} from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  where,
+  setDoc,
+} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const options = {
-  method: 'GET',
-  url: 'https://picsum.photos/652/360',
+  method: "GET",
+  url: "https://picsum.photos/652/360",
   // headers: {
   //   'content-type': 'application/json',
   //   'X-RapidAPI-Key': 'fc9ac53e3amsh7f0c55372e6f0bep1224a8jsn1e1b9847a5de',
@@ -98,9 +117,11 @@ async function handlesearch(){
             data: `{"image":"https://picsum.photos/id/${i+10}/652/360"}`
           };
 
-          await axios.request(options2).then(async function (response) {
-            console.log(response.data.body);
-            var tags=[];
+    await axios
+      .request(options2)
+      .then(async function (response) {
+        console.log(response.data.body);
+        var tags = [];
 
             const sortable = Object.entries(response.data.body.image_classification)
     .sort(([,a],[,b]) => b-a)
@@ -156,14 +177,18 @@ async function handlesearch(){
  }
 export default function Home() {
   return (
-    <div className="bg-bghome h-screen bg-no-repeat">
+    <div className="bg-bghome h-screen bg-no-repeat w-screen">
       <div className="flex flex-col justify-center items-center gap-32 h-screen ">
-       
-        <span className="text-white text-[70px] text-center font-medium mt-24 font-jost">Bringing your vision to life,<br/> one shot at a time</span>
-         <button onClick={()=>{adddata()}}>
+        <span className="text-white text-[70px] text-center font-medium mt-24 font-jost">
+          Bringing your vision to life,
+          <br /> one shot at a time
+        </span>
+        {/* <button onClick={()=>{adddata()}}>
         images
+        </button> */}
+        <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out">
+          <Link to="/signup">GET STARTED</Link>
         </button>
-        <button  className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="/signup">GET STARTED</Link></button>
       </div>
     </div>
   );

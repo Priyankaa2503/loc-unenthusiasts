@@ -34,7 +34,7 @@ export const Profile = ({newid,setnewid}) => {
 
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
-        const nameQuery=query(collectionRef,where("createdby","==",newid))
+        const nameQuery=query(collectionRef,where("createdby","==",user.uid))
         var arr=[];
           await getDocs(nameQuery)
               .then((res) => {
@@ -53,7 +53,7 @@ export const Profile = ({newid,setnewid}) => {
       }
 
     const getfireuser = async () => {
-        const docRef = doc(database, "users", newid);
+        const docRef = doc(database, "users", user.uid);
         const docSnap = await getDoc(docRef);
         setfireuser(docSnap.data())
     }
@@ -65,7 +65,7 @@ export const Profile = ({newid,setnewid}) => {
     }
 
     const handleUpdate = () => {
-        const doctoupdate = doc(database, 'users', newid)
+        const doctoupdate = doc(database, 'users', user.uid)
         updateDoc(doctoupdate, {
             bio: data.bio,
             type: data.type
@@ -73,7 +73,7 @@ export const Profile = ({newid,setnewid}) => {
     }
 
     const handleUpdateImage = () => {
-        const storageRef = ref(storage, newid);
+        const storageRef = ref(storage, user.uid);
 
         const uploadTask = uploadBytesResumable(storageRef, data.image)
         uploadTask.on('state_changed',
@@ -84,7 +84,7 @@ export const Profile = ({newid,setnewid}) => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               console.log('File available at', downloadURL);
-              await updateDoc(doc(database, "users", newid), {
+              await updateDoc(doc(database, "users", user.uid), {
                 imageURL: downloadURL
               })
             });
@@ -94,10 +94,10 @@ export const Profile = ({newid,setnewid}) => {
     return (
         <div>
             <Navbar newid={newid} setnewid={setnewid} />
-            <div className="flex flex-row bg-profileBg p-48 h-screen w-screen bg-cover bg-no-repeat">
+            <div className="flex flex-row bg-profilebg p-48 h-screen bg-cover bg-no-repeat">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
-                    <div className='flex flex-col'>
-                        {fireuser?.imageURL?<div className='w-6/12 sm:w-4/12 px-'><img src={fireuser?.imageURL} className="h-[200px] w-[200px] mb-10 rounded-full" /></div>:<label htmlFor="image">
+                    <div className='flex flex-col gap-4 items-center'>
+                        {fireuser?.imageURL?<div className=''><img src={fireuser?.imageURL} className="h-[200px] w-[200px] rounded-full shadow-lg shadow-black" /></div>:<label htmlFor="image">
                         <img src={ProfilePic} className="h-[200px] w-[200px] mb-10" />
                         </label>}
                         <input
@@ -107,50 +107,77 @@ export const Profile = ({newid,setnewid}) => {
                             placeholder="Upload Photo"
                             onChange={(event) => onChangefile(event)}
                             name="image"
-                            
+                           
                         />
-                        <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{ mt: 10, mb: 2 }}
-                        onClick={handleUpdateImage}
-                        className="w-64"
-                    >
-                        Update Profile Picture
-                    </Button>
-                        <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
+                         <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"  onClick={handleUpdateImage}>Update Profile Picture</button>
+                        
+                        <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4  shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"><Link to="#gallery">View Gallery</Link></button>
                     </div>
                 </div>
-                <div className="flex flex-col h-[100%] bg-[#00000050] w-[60%] p-8">
-                    <div className='flex flex-row h-[20px] w-100%'>
-                        <div className='mr-16 text-2xl font-bold text-white'>Name</div>
-                        <div className='text-2xl font-bold text-white'>{fireuser.name}</div>
+                <div className="flex flex-col h-[100%] bg-[#deebe1] shadow-md shadow-black rounded-xl w-[50%] p-8 gap-4">
+                    <div className='flex flex-row  justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Name:</div>
+                        <div className='  '>{user.displayName}</div>
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>E-mail</div>
-                        <div className='text-2xl font-bold text-white'>{fireuser.email}</div>
+                    <div className='flex flex-row justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Email:</div>
+                        <div className='  '>{user.email}</div>
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>Bio</div>
-                        {fireuser?.bio ? <div className='text-2xl font-bold text-white'>{fireuser.bio}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="bio"></input>}
+                    
+                    <div className='flex flex-row  justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Bio:</div>
+                        {fireuser?.bio ? <div className=''>{fireuser.bio}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="bio"></input>}
                     </div>
-                    <div className='flex flex-row h-[20px] w-100% mt-12'>
-                        <div className='mr-16 text-2xl font-bold text-white'>type</div>
-                        {fireuser?.type ? <div className='text-2xl font-bold text-white'>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
+                    <div className='flex flex-row justify-start font-ibm text-black text-2xl'>
+                        <div className=''>Type:</div>
+                        {fireuser?.type ? <div className=''>{fireuser.type}</div> : <input type='text' className='h-8' onChange={(event) => handleInput(event)} name="type"></input>}
+                       
                     </div>
                     <div className='mt-6'>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        onClick={handleUpdate}
-                        className="w-64"
-                    >
-                        Update Profile
-                    </Button>
+                    <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white w-[250px] font-jost py-2 px-4 mt-12 shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out"  onClick={handleUpdate}>Update Profile</button>
                     </div>
                 </div>
             </div>
+            <div class="">
+  <form class="bg-white p-6 rounded-lg shadow-md">
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="caption">
+        Caption
+      </label>
+      <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="caption">
+        Description
+      </label>
+      <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="image">
+        Image
+      </label>
+      <input class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image" id="image"></input>
+      </div>
+    <div class="mb-4">
+     
+    
+      <div class="flex flex-wrap">
+  <label for="tags" class="block text-gray-700 text-sm font-bold mb-2 mr-2">
+    Tags:
+  </label>
+  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 1"></input>
+  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 2"></input>
+</div>
+
+    </div>
+    <div class="flex justify-end">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Add Post
+      </button>
+    </div>
+  </form>
+</div>
+
             <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">
                 <p className="font-jost text-black font-bold text-[100px] mt-10 p-10">My Gallery</p>
                 <div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
@@ -167,6 +194,7 @@ export const Profile = ({newid,setnewid}) => {
            } 
         </div>
             </div>
+         
         </div>
 
     )

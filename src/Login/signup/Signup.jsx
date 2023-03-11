@@ -35,6 +35,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  let navigate = useNavigate();
   let googleProv = new GoogleAuthProvider()
   const auth = getAuth();
   const handleSubmit = (event) => {
@@ -56,6 +57,8 @@ export default function SignUp() {
         email: data.get('email'),
         posts:[]
       })
+      setDoc(doc(database,'userchats',user.uid),{})
+        navigate("/explore")
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -81,6 +84,8 @@ export default function SignUp() {
           posts:[]
         })
         setDoc(doc(database,'userchats',user.uid),{})
+        navigate("/explore")
+        
       })
       .catch((error) => {
         const errorCode = error.code;

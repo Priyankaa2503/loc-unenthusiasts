@@ -37,6 +37,7 @@ function Navbar() {
                         <Link to="/events"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">EVENTS</div></Link>
                         <Link to="/chats"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">CHAT</div></Link>
                         <Link to="/aboutus"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">ABOUT US</div></Link>
+                        <Link to="/profile"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div></Link>
                         <Button
                             fullWidth
                             variant="contained"

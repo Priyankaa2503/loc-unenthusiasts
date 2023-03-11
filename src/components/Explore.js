@@ -12,8 +12,6 @@ export const Explore=()=>{
     const [cardarr,setcardarr]=useState([]);
     const getImages= async()=>{
         const collectionRef = collection(database, 'images');
-        
-
         var arr=[];
           await getDocs(collectionRef)
               .then((res) => {
@@ -24,7 +22,6 @@ export const Explore=()=>{
                }) 
             })
             setcardarr([...arr]);
-
     }
     console.log(cardarr);
     useEffect(()=>{

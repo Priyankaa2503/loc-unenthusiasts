@@ -37,9 +37,16 @@ export default function EventCard() {
     getEvents();
   }, []);
 
-  const handleReject = () => {};
-  const handleAccept = () => {};
-
+  const handleAccept=(id)=>{
+    console.log(id);
+    const doctoupdate = doc(database, 'events', id)
+        updateDoc(doctoupdate, {
+            accepted:true
+        })
+  }
+  const handleReject=(id)=>{
+  }
+  
   const auth = getAuth();
   const user = auth.currentUser;
   const [expanded, setExpanded] = React.useState(false);
@@ -77,38 +84,39 @@ export default function EventCard() {
             OUTGOING EVENTS
           </button>
         </div>
-      </div>
-      {thons.map((note) => {
-        let id = note.id;
-        let noted = note.data();
-        return (
-          <Accordion
-            expanded={expanded === "panel3"}
-            onChange={handleChange("panel3")}
-            className="w-[60%] px-10 py-3"
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3bh-content"
-              id="panel3bh-header"
-              className="w-[400px]"
-            >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                {noted.Title}
-              </Typography>
-              <span className="flex gap-8">
-                <button onClick={handleAccept}>✓</button>
-                {!note.accepted && <button onClick={handleReject}>X</button>}
-              </span>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>{noted.desc}</Typography>
-              <Typography>{noted.Location}</Typography>
-              <Typography>By: {noted.fromname}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        );
-      })}
-    </div>
-  );
+  {
+            thons.map((note) => {
+                let id=note.id;
+                let noted=note.data();
+                return <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+    <AccordionSummary
+      expandIcon={<ExpandMoreIcon />}
+      aria-controls="panel3bh-content"
+      id="panel3bh-header" className='w-[700px]'
+    >
+      <Typography sx={{ width: '33%', flexShrink: 0 }}>
+        {noted.Title}
+      </Typography>
+      <span className="flex gap-8">
+      <button onClick={()=>{handleAccept(note.id)}} >✓</button>
+      {!note.accepted && <button onClick={handleReject} >X</button>}
+
+      </span>
+    </AccordionSummary>
+    <AccordionDetails>
+      <Typography>
+        {noted.desc}
+      </Typography>
+      <Typography>
+        {noted.Location}
+      </Typography>
+      <Typography>
+        By:  {noted.fromname}
+      </Typography>
+    </AccordionDetails>
+  </Accordion>;
+              })}
+
+  </div>
+  )
 }

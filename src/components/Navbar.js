@@ -27,13 +27,13 @@ function Navbar() {
                     </div>               
                     <div className="flex flex-row justify-end items-center ">
                    
-                        <ul className="hidden md:flex flex-row gap-x-20 justify-end items-center mr-8">
-                        <Link to ="/explore"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">EXPLORE</div></Link>
+                        <ul className="hidden md:flex flex-row gap-x-20 justify-end items-center ml-8 mr-8">
+                        <Link to ="/explore"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost justify-self-center">EXPLORE</div></Link>
                             <Link to ="/gallery"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">GALLERY</div></Link>
                             <Link to ="/events"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">EVENTS</div></Link>
                             <Link to ="/chat"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">CHAT</div></Link>
                             <Link to ="/aboutus"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">ABOUT US</div></Link>
-
+                            <Link to ="/profile"><div className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div></Link>
                         </ul>
                        
                           

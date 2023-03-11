@@ -25,7 +25,7 @@ module.exports = {
         'bghome': "url('/src/assets/bghome.png')",
         'bannerBg':"url('/src/assets/banner-bg.jpeg')",
         'eventsbg':"url('/src/assets/events.jpg')",
-        
+        'profileBg':"url('/src/assets/profileBg.jpeg')",
       }
     },
   },

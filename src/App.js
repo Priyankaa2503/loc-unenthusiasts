@@ -7,6 +7,7 @@ import Signup from "./Login/signup/Signup";
 import Home from "./pages/Home";
 import Chats from './components/Chats';
 import Events from "./pages/Events";
+import {Profile} from "./pages/Profile";
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/footer" element={<Footer />}></Route>
           <Route path="/chats" element={<Chats />}></Route>
           <Route path="/events" element={<Events />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Routes>
       </Router>
     </div>

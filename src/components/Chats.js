@@ -40,9 +40,9 @@ const Chats = () => {
   return (
     <>
     <Navbar />
-    <div className="bg-bannerBg h-screen bg-cover bg-no-repeat w-screen">
+    <div className="bg-bannerBg h-screen flex  bg-cover bg-no-repeat w-screen">
       
-    <div style={{  "height": "100vh", "width": "100vw", "position": "absolute", backgroundSize: "cover" ,display:"flex", alignItems:"center",justifyContent:"center"}}>
+    <div style={{  "height": "100vh", "width": "100vw", backgroundSize: "cover" ,display:"flex", alignItems:"center",justifyContent:"center"}}>
         <div id='chatcont' >
           <Sidebar user={user} imagesrc={imagesrc}/>
           <Openchat user={user}/>

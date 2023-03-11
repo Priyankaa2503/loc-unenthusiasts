@@ -58,7 +58,7 @@ function Navbar() {
               EVENTS
             </div>
           </Link>
-          <Link to="/chat">
+          <Link to="/chats">
             <div className=" hover:scale-110 transition duration-300 ease-in-out  text-white  text-xl font-medium font-jost ">
               CHAT
             </div>

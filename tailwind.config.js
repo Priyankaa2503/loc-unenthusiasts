@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -10,6 +11,7 @@ module.exports = {
         lg: "1026px"
       },
       fontFamily: {
+        jost: ["Jost", "sans-serif"],
         
         
       },
@@ -18,6 +20,10 @@ module.exports = {
         white:"#FFFFFF"
       
       },
+      backgroundImage: {
+        'bghome': "url('/src/assets/bghome.png')",
+        
+      }
     },
   },
   plugins: [],

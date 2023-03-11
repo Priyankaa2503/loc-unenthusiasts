@@ -63,7 +63,7 @@ else{
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div onClick={handleLike} className='text-[#2f2e2e] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
-                    <div className='text-[#2f2e2e] font-grotesk' onClick={handleClick}>View More<ArrowDropDownIcon/></div>
+                    <div className='text-[#2f2e2e] font-grotesk' onClick={handleClick} style={{cursor:"pointer"}}>View More<ArrowDropDownIcon/></div>
                 </div>
                 {isShown &&(
                 <div className='flex flex-col'>

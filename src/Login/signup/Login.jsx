@@ -68,7 +68,7 @@ export default function SignInSide() {
       const user=userCredential.user;
       // ...
       // console.log(user);
-      navigate('/chats')
+      navigate('/explore')
     })
     .catch((error) => {
       const errorCode = error.code;

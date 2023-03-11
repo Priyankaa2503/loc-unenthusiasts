@@ -1,13 +1,18 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import MobNav from "./MobNav";
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { Link } from "react-router-dom";
 import MonochromePhotosIcon from '@mui/icons-material/MonochromePhotos';
 
+import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 function Navbar() {
-    const[active,setActive]=useState(false)
-    const showMenu = ()=>
-    {
+    let nav =useNavigate()
+    const auth = getAuth();
+  const user = auth.currentUser;
+    const [active, setActive] = useState(false)
+    const showMenu = () => {
         setActive(!active)
     }
     return (
@@ -41,8 +46,7 @@ function Navbar() {
                     </div>
                     <MobNav showMenu={showMenu} active={active}/>
         </div>
-        );
-    }
-    
-    export default Navbar;
-    
+    );
+}
+
+export default Navbar;

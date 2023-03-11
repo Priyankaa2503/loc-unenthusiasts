@@ -6,6 +6,7 @@ import { app, database, storage } from './firebaseConfig'
 import { collection, addDoc,getDoc, getDocs, doc, updateDoc, deleteDoc ,onSnapshot,query,where,setDoc} from "firebase/firestore";
 import { async } from '@firebase/util';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import Navbar from './Navbar'
 
 const Chats = () => {
   const collectionRef = collection(database, 'users')
@@ -37,12 +38,18 @@ const Chats = () => {
 // }
 
   return (
+    <>
+    <Navbar />
+    <div className="bg-bannerBg h-screen bg-cover bg-no-repeat w-screen">
+      
     <div style={{  "height": "100vh", "width": "100vw", "position": "absolute", backgroundSize: "cover" ,display:"flex", alignItems:"center",justifyContent:"center"}}>
         <div  id='chatcont' >
           <Sidebar user={user} imagesrc={imagesrc}/>
           <Openchat user={user}/>
         </div>
     </div>
+    </div>
+    </>
   )
 }
 

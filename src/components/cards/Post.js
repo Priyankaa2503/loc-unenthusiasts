@@ -141,8 +141,9 @@ else{
     }
 
     return(
-        <div className='mt-10 ml-10 bg-white p-6 w-[640px]'>
-            <div className="flex flex-row gap-2" onClick={handleGotoProfile}><AccountCircleIcon/><span>{data.name}</span></div>
+      
+        <div className='mt-10 ml-10 bg-white rounded-xl p-6 w-[640px]'>
+            <div className="flex flex-row gap-2" onClick={handleGotoProfile}><AccountCircleIcon/><span>{data.name}</span></div>          
             <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-3'></img>
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>

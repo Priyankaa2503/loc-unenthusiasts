@@ -29,7 +29,9 @@ export const Explore=()=>{
 
     },[])
     return(
-        <div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
+        <div className="bg-black ">
+            <p className="text-white text-center font-jost font-light pt-10 text-5xl">EXPLORE </p>
+        <div className="grid-cols-1 grid md:grid-cols-2 p-12  justify-center">
            {
             cardarr?.map((item,index)=>{
                 console.log(item.array);
@@ -41,6 +43,7 @@ export const Explore=()=>{
                  )
             },[])
            } 
+        </div>
         </div>
     )
 }

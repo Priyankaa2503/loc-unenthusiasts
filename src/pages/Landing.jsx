@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div>
         <Header/>
-        <div className='flex justify-center'><Banner/></div>
-        <div className='flex justify-center'><Explore/></div>
+        <Banner/>
+        <Explore/>
     </div>
   )
 }

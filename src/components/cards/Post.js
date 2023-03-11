@@ -1,10 +1,11 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 export const Post=()=>{
     const [text, setText] = useState('View More');
+    const [isShown, setIsShown] = useState(false);
     function handleClick() {
+        setIsShown(current => !current);
         if(text === 'View More'){
           setText('View Less');
         }else{
@@ -19,10 +20,14 @@ export const Post=()=>{
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div className='text-[#2f2e2e] font-grotesk'><FavoriteIcon/><span className='ml-1'>25</span></div>
-                    <div className='text-[#2f2e2e] font-grotesk' onClick={handleClick}>View More<ArrowDropDownIcon/></div>
+                    <button className='text-[#2f2e2e] font-grotesk' onClick={handleClick}>{text}</button>
                 </div>
-                <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>description</div>
-                <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                {isShown &&(
+                <div className='flex flex-col'>
+                    <div className='text-[#2f2e2e] mt-2 text-xl font-playfair'>description</div>
+                    <p className='text-sm text-[#2f2e2e] font-grotesk mt-2'>tags</p>
+                </div>
+                )}
             </div>
         </div>
     )

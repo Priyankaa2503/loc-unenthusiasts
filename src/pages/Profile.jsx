@@ -94,7 +94,7 @@ export const Profile = ({newid,setnewid}) => {
     return (
         <div>
             <Navbar newid={newid} setnewid={setnewid} />
-            <div className="flex flex-row bg-profilebg p-48 h-screen bg-cover bg-no-repeat">
+            <div className="flex flex-row bg-profilebg p-48 h-screen bg-cover">
                 <div className="flex flex-col h-[100%] w-[60%] p-6 justify-center">
                     <div className='flex flex-col gap-4 items-center'>
                         {fireuser?.imageURL?<div className=''><img src={fireuser?.imageURL} className="h-[200px] w-[200px] rounded-full shadow-lg shadow-black" /></div>:<label htmlFor="image">
@@ -138,22 +138,22 @@ export const Profile = ({newid,setnewid}) => {
                     </div>
                 </div>
             </div>
-            <div class="">
-  <form class="bg-white p-6 rounded-lg shadow-md">
+            {/* <div class=""> */}
+  <form class="bg-[#61876E] p-6 shadow-md ">
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="caption">
+      <label class="block text-black font-bold mb-2" for="caption">
         Caption
       </label>
       <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
     </div>
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="caption">
+      <label class="block text-black font-bold mb-2" for="caption">
         Description
       </label>
       <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="caption" name="caption"></textarea>
     </div>
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="image">
+      <label class="block text-black font-bold mb-2" for="image">
         Image
       </label>
       <input class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image" id="image"></input>
@@ -162,25 +162,25 @@ export const Profile = ({newid,setnewid}) => {
      
     
       <div class="flex flex-wrap">
-  <label for="tags" class="block text-gray-700 text-sm font-bold mb-2 mr-2">
+  <label for="tags" class="block text-black  font-bold mb-2 mr-2">
     Tags:
   </label>
   <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 1"></input>
-  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 2"></input>
+  <input type="text" name="tags" id="tags" class="w-full px-3 py-2 text-gray-700 mt-2 border rounded-lg focus:outline-none focus:shadow-outline" placeholder="Add tag 2"></input>
 </div>
 
     </div>
     <div class="flex justify-end">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button class="bg-[#AA5656]  text-white font-bold py-2 px-4 rounded">
         Add Post
       </button>
     </div>
   </form>
-</div>
+{/* </div> */}
 
-            <div className="h-screen flex flex-col justify-start items-start p-10" id="gallery">
-                <p className="font-jost text-black font-bold text-[100px] mt-10 p-10">My Gallery</p>
-                <div className="md:grid md:grid-cols-2 p-12 h-screen w-full justify-center">
+            <div className="  bg-[#61876E]  p-4" id="gallery">
+                <p className="font-jost text-black font-bold text-[100px]">My Gallery</p>
+                <div className="md:grid md:grid-cols-2 items-center gap-16 w-full justify-center">
            {
             cardarr?.map((item,index)=>{
                 console.log(item.array);

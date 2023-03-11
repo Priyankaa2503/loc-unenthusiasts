@@ -4,9 +4,9 @@ import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import { Link } from "react-router-dom";
 import MonochromePhotosIcon from "@mui/icons-material/MonochromePhotos";
 import PersonIcon from "@mui/icons-material/Person";
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import { app, database, storage } from './firebaseConfig'
 import { collection, addDoc,getDoc, getDocs, doc, updateDoc, deleteDoc ,onSnapshot,query,where,setDoc, serverTimestamp} from "firebase/firestore";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -21,6 +21,15 @@ import {
 import { Autocomplete, TextField } from "@mui/material";
 
 function Navbar({newid,setnewid}) {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   let nav = useNavigate();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -97,15 +106,7 @@ function Navbar({newid,setnewid}) {
               CHAT
             </div>
           </Link>
-          <div onClick={handlecuruserprofile} className="hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                            onClick={()=>{signOut(auth); nav("/")}}
-                        >
-                            Log Out
-                        </Button>
+          {/* <div onClick={handlecuruserprofile} className="text-white hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div> */}
           {/* search field */}
 
           <form>
@@ -166,12 +167,21 @@ function Navbar({newid,setnewid}) {
            
           </form>
           {/* done */}
-          <PersonIcon
-            style={{ color: "#FFFFFF", width: "30px", height: "30px" }}
-          />
+          
+          {/* try */}
+          <div>
+      <Button onClick={handleClick}><PersonIcon style={{ color: "#FFFFFF", width: "30px", height: "30px" }}/></Button>
+      <Menu
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handlecuruserprofile}>PROFILE</MenuItem>
+        <MenuItem onClick={()=>{signOut(auth); nav("/")}}>LOG OUT</MenuItem>
+      </Menu>
+    </div>
         </div>
-
-        {/* </div> */}
       </div>
       <MobNav showMenu={showMenu} active={active} />
     </div>

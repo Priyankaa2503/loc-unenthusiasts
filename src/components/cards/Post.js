@@ -8,12 +8,14 @@ import useRazorpay from 'react-razorpay';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import DownloadIcon from '@mui/icons-material/Download';
 
 import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where, arrayRemove, setDoc, arrayUnion} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import Navbar from '../Navbar';
 
-export const Post=({getImages,del,setdel,id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
+export const Post=({watermark,getImages,del,setdel,id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
   const auth = getAuth();
   const user = auth.currentUser;
   let nav=useNavigate()
@@ -69,6 +71,10 @@ export const Post=({getImages,del,setdel,id,imageurl,caption,name,likes,newid,se
 
 await updateDoc(doc(database, "users", user.uid), {
       purchased:arrayUnion(id)
+})
+
+await updateDoc(doc(database, "images",id ), {
+  purchasedby:user.uid
 })
 .then(()=>{
   alert(response.razorpay_payment_id);
@@ -176,11 +182,11 @@ else{
 
 
     return(
-      
         <div style={{position:'relative'}} className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
+          
             <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{name}</span></div>          
             <img draggable="false" src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-2 rounded-md'></img>
-            <h1 style={{position:'absolute',height:'60px',width:'60px',fontSize:'60px',fontWeight:'1000',color:'white',top:'100px',left:'150px'}} class="bottom-left">WaterMark</h1>
+            {watermark!==0 && <h1 style={{position:'absolute',height:'60px',width:'60px',fontSize:'60px',fontWeight:'1000',color:'white',top:'100px',left:'150px'}} class="bottom-left">WaterMark</h1>}
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div onClick={handleLike} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
@@ -194,7 +200,7 @@ else{
                         <p className='text-md text-[#A7727D] font-grotesk flex gap-2  '>{data.tags.map((item)=>{return<p class="bg-transparent text-[#A7727D] font-semibold mt-2 ">
                             #{item}
                             </p> })}</p>
-                        <  ShoppingCartIcon onClick={()=>{handlePayment("rzp_test_Pw7oOZCGeCRVYw",data.name)}}  style={{ width: "40px", height: "40px" }} />
+                        {watermark!=0 ? <  ShoppingCartIcon onClick={()=>{handlePayment("rzp_test_Pw7oOZCGeCRVYw",data.name)}}  style={{ width: "40px", height: "40px" }} />:<a target="_blank" href={imageurl}><  DownloadIcon style={{ width: "40px", height: "40px" }} /></a>}
                     </div>
                 </div>
                 )}

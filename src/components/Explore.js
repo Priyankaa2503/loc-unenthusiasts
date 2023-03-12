@@ -85,6 +85,7 @@ export const Explore = ({ newid, setnewid }) => {
   let index = cardarr.indexOf("alp");
   return (
     <div className="bg-[#61876E] ">
+      
       <Autocomplete
         disablePortal
         id="combo-box-demo"
@@ -96,7 +97,7 @@ export const Explore = ({ newid, setnewid }) => {
           setind(index.ind);
           // nav("/profile")
         }}
-        sx={{ width: 300,paddingTop:5 ,paddingLeft:5}}
+        sx={{ width: 300,marginTop:5 ,marginLeft:70,backgroundColor:"white"}}
         renderInput={(params) => <TextField {...params} label="Search" />}
       />
 

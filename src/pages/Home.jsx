@@ -169,12 +169,38 @@ async function handlesearch(){
       
 
 
-
-
+       
 
 
   
  }
+ async function fuc(){
+  const options = {
+    method: 'GET',
+    url: 'https://image-kit.p.rapidapi.com/imagekit',
+    params: {
+      url: 'https://picsum.photos/652/360',
+      quality: '80',
+      resize: 'auto,512',
+      rotate: '45',
+      blur: '8'
+    },
+    headers: {
+      'X-RapidAPI-Key': '05a69e41edmsha67e45c49afa614p11bbe3jsn12819044cc55',
+      'X-RapidAPI-Host': 'image-kit.p.rapidapi.com'
+    }
+  };
+
+  axios.request(options).then(function (response) {
+    console.log(response.data);
+  }).catch(function (error) {
+    console.error(error);
+  });
+
+  
+}
+
+
 export default function Home() {
   return (
     <div className="bg-bghome h-screen bg-no-repeat w-screen">
@@ -183,9 +209,9 @@ export default function Home() {
           Bringing your vision to life,
           <br /> one shot at a time
         </span>
-        {/* <button onClick={()=>{adddata()}}>
+        <button onClick={()=>{fuc()}}>
         images
-        </button> */}
+        </button>
         <button className="bg-[#61876E] hover:bg-[#AA5656] border-2  rounded-2xl text-white font-jost py-2 px-4 mt-6 w-[300px] shadow-black shadow-lg hover:scale-110 transition duration-300 ease-in-out">
           <Link to="/signup">GET STARTED</Link>
         </button>

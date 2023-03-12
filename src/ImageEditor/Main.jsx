@@ -204,7 +204,7 @@ const Main = () => {
                     <div className="sidebar">
                         <div className="side_body">
                             <div className="filter_section">
-                                <span>Filters</span>
+                                <span className='font-jost'>Filters</span>
                                 <div className="filter_key">
                                     {
                                         filterElement.map((v, i) => <button className={property.name === v.name ? 'active' : ''} onClick={() => setProperty(v)} key={i} >{v.name}</button>)

@@ -9,7 +9,7 @@
         padding: 28px;
         width: 700px;
         height: 80%;
-        background-color: #bb7676;
+        background-color: #ffffff54;
         box-shadow: 0 8px 16px 0px rgb(220, 207, 207);
         .card_header {
             text-align: center;
@@ -25,12 +25,13 @@
             .sidebar {
                 .reset {
                     margin-top: 20px;
+                    padding: 50px;
                     .save{
-                        background-color: #e335f3 !important;
+                        background-color: rgb(180, 142, 145)!important;
                         margin-left: 5px;
                     }
                     button {
-                        background-color: rgb(242,53,85);
+                        background-color: rgb(180, 142, 145);
                         padding: 8px;
                         border-radius: 3px;
                         outline: none;
@@ -59,7 +60,7 @@
                         grid-template-columns: repeat(2, 1fr);
                         grid-gap: 8px;
                         button.active {
-                            background-color: rgb(84, 93, 216);
+                            background-color: rgb(180, 142, 145);
                             color: #fff;
                         }
                         button {
@@ -100,7 +101,7 @@
                             grid-template-columns: repeat(4, 1fr);
                             grid-gap: 5px;
                             div {
-                                border: 1px solid rgb(179, 194, 194);
+                                border: 1px solid rgb(180, 142, 145);
                                 padding: 8px 5px;
                                 display: flex;
                                 justify-content: center;
@@ -169,18 +170,18 @@
                     }
                     .redo,
                     .undo {
-                        background-color: #4a55f3;
+                        background-color: rgb(180, 142, 145);
                         margin-left: 5px;
                         color: #fff;
                         padding: 5px 10px;
                         font-size: 18px;
                     }
                     label {
-                        background-color: #115811;
+                        background-color: rgb(180, 142, 145);
                         margin-left: 5px;
                     }
                     .crop {
-                        background-color: #8e33b7;
+                        background-color: rgb(180, 142, 145);
                         margin-left: 5px;
                     }
                 }

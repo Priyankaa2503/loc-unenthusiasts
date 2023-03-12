@@ -9,11 +9,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where} from "firebase/firestore";
+import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapshot,query,where, arrayRemove, setDoc, arrayUnion} from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
+  const auth = getAuth();
+  const user = auth.currentUser;
   let nav=useNavigate()
 
     const handleGotoProfile=()=>{
@@ -32,6 +34,15 @@ export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
             setdata({...doc.data()});
         });
     }, [])
+    useEffect(() => {
+      const unsub = onSnapshot(
+        doc(database, "images", id), 
+        { includeMetadataChanges: true }, 
+        (doc) => {
+            console.log(doc.data(),'asgdargsd');
+            setdata({...doc.data()});
+        });
+    }, [newid])
     
     
    
@@ -53,10 +64,16 @@ export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
       image: "https://example.com/your_logo",
       // order_id: "sdgvgs", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
       handler: async function (response) {
-        alert(response.razorpay_payment_id);
-        const docRef = doc(database, "users", id);
-const docSnap = await getDoc(docRef);
-console.log(docSnap.data());
+        // alert(response.razorpay_payment_id);
+       
+
+await updateDoc(doc(database, "users", user.uid), {
+      purchased:arrayUnion(id)
+})
+.then(()=>{
+  alert(response.razorpay_payment_id);
+})
+
        
         // alert(response.razorpay_signature);
       },
@@ -111,7 +128,14 @@ console.log(docSnap.data());
 
     },[])
    
-        
+        const handleDelete=()=>{
+          const doctoupdate = doc(database, 'images', id)
+    deleteDoc(doctoupdate)
+    const doctoupdate2 = doc(database, 'users', createdby)
+    updateDoc(doctoupdate2, {
+      posts:arrayRemove(id)
+    })
+        }
     
     function handleClick() {
         setIsShown(current => !current);
@@ -145,14 +169,17 @@ else{
 }
     }
 
+
     return(
       
-        <div className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
-            <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{data.name}</span></div>          
-            <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-2 rounded-md'></img>
+        <div style={{position:'relative'}} className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
+            <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{name}</span></div>          
+            <img draggable="false" src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-2 rounded-md'></img>
+            <h1 style={{position:'absolute',height:'60px',width:'60px',fontSize:'60px',fontWeight:'1000',color:'white',top:'100px',left:'150px'}} class="bottom-left">WaterMark</h1>
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>
                     <div onClick={handleLike} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>{data.likes}</span></div>
+                    {createdby===user.uid && <div onClick={handleDelete} className='text-[#A7727D] font-grotesk'><FavoriteIcon/><span className='ml-1'>Delete post</span></div>}
                     <div className='text-[#A7727D] font-grotesk' onClick={handleClick} style={{cursor:"pointer"}}>View More<ArrowDropDownIcon/></div>
                 </div>
                 {isShown &&(

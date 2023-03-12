@@ -61,7 +61,7 @@ export const Profile = ({ newid, setnewid }) => {
   useEffect(() => {
     getfireuser();
     getImages()
-  }, [del])
+  }, [newid])
 
   
 

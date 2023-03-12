@@ -148,6 +148,7 @@ function Navbar({newid,setnewid}) {
       id="combo-box-demo"
       options={profilesearch}
       onChange={(e,index)=>{
+        console.log(index.id);
         setnewid(index.id)
         nav("/profile")
       }}

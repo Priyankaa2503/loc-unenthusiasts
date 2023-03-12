@@ -34,6 +34,15 @@ export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
             setdata({...doc.data()});
         });
     }, [])
+    useEffect(() => {
+      const unsub = onSnapshot(
+        doc(database, "images", id), 
+        { includeMetadataChanges: true }, 
+        (doc) => {
+            console.log(doc.data(),'asgdargsd');
+            setdata({...doc.data()});
+        });
+    }, [newid])
     
     
    
@@ -158,7 +167,7 @@ else{
     return(
       
         <div className='mt-10 ml-10 bg-[#EDDBC7] rounded-xl p-3 w-[640px]'>
-            <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{data.name}</span></div>          
+            <div className="flex flex-row gap-2 text-[#A7727D] text-xl uppercase font-jost font-bold" onClick={handleGotoProfile}><AccountCircleIcon /><span>{name}</span></div>          
             <img src={imageurl} className='w-[200px] md:w-[652px] md:h-[360px] mt-2 rounded-md'></img>
             <div className='flex flex-col justify-center mt-3'>       
                 <div className='flex flex-row justify-between'>

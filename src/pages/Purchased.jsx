@@ -4,7 +4,7 @@ export default function Purchased() {
   return (
     <div className='bg-[#61876E] '>
         
-    <div className="  bg-[#61876E]  p-4" id="gallery">
+    {/* <div className="  bg-[#61876E]  p-4" id="gallery">
                 <p className="font-jost text-black font-bold text-[100px]">Purchased</p>
                 <div className="md:grid md:grid-cols-2 items-center gap-16 w-full justify-center">
            {
@@ -19,7 +19,7 @@ export default function Purchased() {
             },[])
            } 
         </div>
-            </div>
+            </div> */}
             </div>
   )
 }

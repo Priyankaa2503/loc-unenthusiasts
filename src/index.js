@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChatcontextProvider } from './context/notes/Chatcontext';
+import { registerLicense } from "@syncfusion/ej2-base";
+
+registerLicense();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

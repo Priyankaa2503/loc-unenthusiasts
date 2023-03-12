@@ -19,27 +19,30 @@
 }
 
 .chatnav{
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     background-color:black;
     color: white;
     height: 8%;
+    padding: 4px;
+
+
 }
 
 #navimg,#searchimage{
-    background-color: brown;
+    background-color: #61876E;
     border-radius: 50%;
-    height: 3vw;
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
     object-fit: cover;
 }
-#navimg1{
+/* #navimg1{
     background-color: brown;
     height: 7vw;
     width: 7vw;
     object-fit: cover;
-}
+} */
 
 #search{
     border-bottom: 1px solid black;

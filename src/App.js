@@ -9,6 +9,7 @@ import Chats from './components/Chats';
 import Events from "./pages/Events";
 import {Profile} from "./pages/Profile";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import Purchased from "./pages/Purchased";
 function App() {
   const auth = getAuth();
   const user = auth.currentUser;
@@ -25,6 +26,7 @@ function App() {
           <Route path="/chats" element={<Chats />}></Route>
           <Route path="/events" element={<Events />}></Route>
           <Route path="/profile" element={<Profile newid={newid} setnewid={setnewid}/>}></Route>
+          <Route path="/purchase" element={<Purchased/>}></Route>
         </Routes>
       </Router>
     </div>

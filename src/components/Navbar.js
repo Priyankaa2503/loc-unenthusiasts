@@ -179,6 +179,7 @@ function Navbar({newid,setnewid}) {
       >
         <MenuItem onClick={handlecuruserprofile}>PROFILE</MenuItem>
         <MenuItem onClick={()=>{signOut(auth); nav("/")}}>LOG OUT</MenuItem>
+        <MenuItem onClick={()=>{signOut(auth); nav("/")}}>PURCHASED</MenuItem>
       </Menu>
     </div>
         </div>

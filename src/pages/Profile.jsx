@@ -187,6 +187,7 @@ export const Profile = ({newid,setnewid}) => {
                 return (
 
                     <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} likes={item.array.likes} />
+                    // <Post id={item.id} caption={item.array.caption} imageurl={item.array.url} name={item.array.name} likes={item.array.likes} createdby={item.array.createdby}/>
 
 
                  )

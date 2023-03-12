@@ -13,7 +13,7 @@ import { collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,onSnapsh
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export const Post=({id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
+export const Post=({getImages,del,setdel,id,imageurl,caption,name,likes,newid,setnewid,createdby})=>{
   const auth = getAuth();
   const user = auth.currentUser;
   let nav=useNavigate()
@@ -135,6 +135,11 @@ await updateDoc(doc(database, "users", user.uid), {
     updateDoc(doctoupdate2, {
       posts:arrayRemove(id)
     })
+    .then(()=>{
+      // setdel(!del);
+      getImages()
+    })
+
         }
     
     function handleClick() {

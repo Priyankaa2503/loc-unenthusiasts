@@ -157,8 +157,8 @@ function Navbar({newid,setnewid}) {
         setnewid(index.id)
         nav("/profile")
       }}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField  {...params} label="Movie" />}
+      sx={{ width: 300 ,color:"white",opacity:"1",backgroundColor:"white"}}
+      renderInput={(params) => <TextField style={{color:"white",opacity:"1"}}  {...params} label="USER NAME" />}
     />
               
               {/* <button
@@ -185,7 +185,7 @@ function Navbar({newid,setnewid}) {
       >
         <MenuItem onClick={handlecuruserprofile}>PROFILE</MenuItem>
         <MenuItem onClick={()=>{signOut(auth); nav("/")}}>LOG OUT</MenuItem>
-        <MenuItem onClick={()=>{signOut(auth); nav("/")}}>PURCHASED</MenuItem>
+        <MenuItem onClick={()=>{ nav("/purchase")}}>PURCHASED</MenuItem>
       </Menu>
     </div>
         </div>

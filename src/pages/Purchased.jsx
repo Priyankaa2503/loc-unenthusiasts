@@ -90,6 +90,8 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
     <div className='bg-[#61876E] h-screen'>
       
         
+    {/* <div className="  bg-[#61876E]  p-4" id="gallery">
+                <p className="font-jost text-black font-bold text-[100px]">Purchased</p>
     <div className="  bg-[#61876E]  p-4" id="gallery">
                 <p className="mt-16 font-jost text-black font-bold text-[100px]">Purchased by {fireuser.name}</p>
                 <div className="md:grid md:grid-cols-2 items-center gap-16 w-full justify-center">

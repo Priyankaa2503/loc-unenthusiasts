@@ -106,6 +106,11 @@ function Navbar({newid,setnewid}) {
               CHAT
             </div>
           </Link>
+          <Link to="/editimage">
+            <div className=" hover:scale-110 transition duration-300 ease-in-out  text-white  text-xl font-medium font-jost ">
+              EDITING
+            </div>
+          </Link>
           {/* <div onClick={handlecuruserprofile} className="text-white hover:text-[#F5F5F5] hover:scale-110 transition duration-300 ease-in-out  text-black text-xl font-medium font-jost ">PROFILE</div> */}
           {/* search field */}
 
